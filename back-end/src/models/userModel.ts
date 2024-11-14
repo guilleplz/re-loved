@@ -1,57 +1,57 @@
-// MODELO DEL USUARIO DE LA BASE DE DATOS
-// Este archivo contiene el modelo de Mongoose para los usuarios,
-// que define la estructura de los documentos que se pueden almacenar en la colección de usuarios.
-
-import mongoose, { Document, Schema } from 'mongoose';
+import mongoose, { Schema, Document } from 'mongoose';
 
 /**
  * Interfaz para los datos del usuario
  * -----------------------------------
  * Esta interfaz define la estructura de los datos que se pueden almacenar en la colección de usuarios.
  * Tiene tres propiedades:
- * - nombre: nombre del usuario (cadena de texto)
- * - email: dirección de correo electrónico del usuario (cadena de texto)
- * - fechaRegistro: fecha y hora en que se registró el usuario (fecha)
+ * - username: nombre de usuario (cadena de texto)
+ * - email: dirección de correo electrónico (cadena de texto)
+ * - password: contraseña (cadena de texto)
+ * - products: lista de identificadores de productos (ObjectId)
  * Todos los campos son obligatorios.
  */
-export interface IUser extends Document {
-  nombre: string;
+interface User extends Document {
+  username: string;
   email: string;
-  fechaRegistro: Date;
+  password: string;
+  products: mongoose.Schema.Types.ObjectId[]; // Relación con los productos
 }
 
 /**
  * Esquema de Mongoose para los usuarios
- * -------------------------------------
+ * --------------------------------------
  * Este esquema define la estructura de los documentos que se pueden almacenar en la colección de usuarios.
- * Tiene tres campos:
- * - nombre: nombre del usuario (cadena de texto) - obligatorio
- * - email: dirección de correo electrónico del usuario (cadena de texto) - obligatorio y único
- * - fechaRegistro: fecha y hora en que se registró el usuario (fecha) - por defecto, la fecha y hora actuales
- * Todos los campos son obligatorios.
+ * Tiene cuatro campos:
+ * - username: nombre de usuario (cadena de texto) - obligatorio y único
+ * - email: dirección de correo electrónico (cadena de texto) - obligatorio y único
+ * - password: contraseña (cadena de texto) - obligatorio
+ * - products: lista de identificadores de productos (ObjectId) - opcional
  */
-const userSchema: Schema<IUser> = new Schema({
-  nombre: {
+const userSchema = new Schema<User>({
+  username: {
     type: String,
     required: true,
+    unique: true,
   },
   email: {
     type: String,
     required: true,
     unique: true,
   },
-  fechaRegistro: {
-    type: Date,
-    default: Date.now,
+  password: {
+    type: String,
+    required: true,
   },
-});
+  products: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Product',
+  }]
+}, { timestamps: true });
 
 /**
  * Modelo de Mongoose para los usuarios
- * ------------------------------------
- * Este modelo se utiliza para realizar operaciones en la colección de usuarios.
- * Se crea a partir del esquema de usuarios y se exporta para poder utilizarlo en otras partes de la aplicación.
  */
-const User = mongoose.model<IUser>('User', userSchema);
+const User = mongoose.model<User>('User', userSchema);
 
 export default User;
