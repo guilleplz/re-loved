@@ -12,10 +12,13 @@ import mongoose, { Schema, Document } from 'mongoose';
  * Todos los campos son obligatorios.
  */
 interface User extends Document {
+  Name: string,
+  Surname: string,
   username: string;
   email: string;
   password: string;
-  products: mongoose.Schema.Types.ObjectId[]; // Relación con los productos
+  productsInStore: mongoose.Schema.Types.ObjectId[]; // Relación con los productos
+  favProducts: mongoose.Schema.Types.ObjectId[];
 }
 
 /**
@@ -43,7 +46,11 @@ const userSchema = new Schema<User>({
     type: String,
     required: true,
   },
-  products: [{
+  productsInStore: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Product',
+  }],
+  favProducts: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Product',
   }]

@@ -97,7 +97,7 @@ export const getUserById = async (req: Request, res: Response): Promise<void> =>
  */
 export const updateUser = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { username, email, password, products } = req.body;
+    const { username, email, password, productsInStore, favProducts } = req.body;
 
     // Buscar usuario por ID
     const usuario = await User.findById(req.params.id);
@@ -107,7 +107,8 @@ export const updateUser = async (req: Request, res: Response): Promise<void> => 
       usuario.username = username || usuario.username;
       usuario.email = email || usuario.email;
       usuario.password = password || usuario.password;
-      usuario.products = products || usuario.products;
+      usuario.productsInStore = productsInStore || usuario.productsInStore;
+      usuario.favProducts = favProducts || usuario.favProducts;
 
       // Guardar los cambios
       await usuario.save();

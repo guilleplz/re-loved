@@ -18,7 +18,7 @@ dotenv.config(); // Cargar variables de entorno desde el archivo .env
  */
 const connectDB = async () => {
   try {
-    const mongoURI = process.env.MONGO_URI; // Obtener URI de MongoDB desde .env
+    const mongoURI = process.env.MONGO_URI;
     if (!mongoURI) {
       throw new Error("No se encontró la variable de entorno MONGO_URI");
     }
