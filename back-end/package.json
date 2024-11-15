@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "dev": "tsc; node dist/server.js"
+    "dev": "tsc; node dist/server.js --host"
   },
   "keywords": [],
   "author": "",
