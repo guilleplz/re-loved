@@ -18,7 +18,7 @@ import User from '../models/userModel';
  */
 export const createUser = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { username, email, password, products } = req.body;
+    const {name, surname, username, email, password, productsInStore, favProducts } = req.body;
 
     // Verificación básica de datos (puedes añadir más validaciones)
     if (!username || !email || !password) {
@@ -26,7 +26,9 @@ export const createUser = async (req: Request, res: Response): Promise<void> => 
       return;
     }
 
-    const nuevoUsuario = new User({ username, email, password, products });
+    console.log(name, surname);
+
+    const nuevoUsuario = new User({ name, surname, username, email, password, productsInStore, favProducts });
 
     // Guardar el nuevo usuario en la base de datos
     await nuevoUsuario.save();
@@ -49,7 +51,7 @@ export const createUser = async (req: Request, res: Response): Promise<void> => 
 export const getUsers = async (req: Request, res: Response): Promise<void> => {
   try {
     // Obtener todos los usuarios de la base de datos
-    const usuarios = await User.find().populate('products'); // Se pueden obtener los productos relacionados
+    const usuarios = await User.find().populate('productsInStore'); // Se pueden obtener los productos relacionados
 
     // Responder con la lista de usuarios
     res.status(200).json(usuarios);
