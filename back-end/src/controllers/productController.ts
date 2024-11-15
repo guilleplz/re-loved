@@ -8,9 +8,15 @@ import Product from '../models/productModel';
 /**
  * Función para CREAR NUEVO PRODUCTO
  * -----------------------------------
- * Esta función crea un nuevo producto en la base de datos a partir de los datos recibidos
- * en el cuerpo de la petición. Se espera que el cuerpo de la petición contenga un objeto
- * con cinco propiedades: nombre, precio, categoria, descripcion y usuarioId.
+ * Crea un nuevo producto en la base de datos a partir de los datos recibidos
+ * en el cuerpo de la petición.
+ * Se espera que el cuerpo de la petición contenga un objeto con las propiedades:
+ * - name: nombre del producto (cadena de texto)
+ * - priceInCents: precio del producto en centavos (número)
+ * - category: categoría del producto (cadena de texto)
+ * - description: descripción del producto (cadena de texto)
+ * - owner: nombre del propietario del producto (cadena de texto)
+ * - img: URL de la imagen del producto (cadena de texto)
  * Al crear el producto, se guarda en la base de datos y se devuelve en la respuesta.
  * Si hay algún error al crear el producto, se devuelve un mensaje de error con el código 500.
  * @param req petición con los datos del producto a crear
@@ -18,25 +24,35 @@ import Product from '../models/productModel';
  */
 export const createProduct = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { nombre, precio, categoria, descripcion, usuarioId } = req.body;
+    const { name, priceInCents, category, description, owner, img } = req.body;
+
     // Crear el nuevo producto con los datos proporcionados
-    const nuevoProducto = new Product({ nombre, precio, categoria, descripcion, usuarioId });
+    const nuevoProducto = new Product({
+      name,
+      priceInCents,
+      category,
+      description,
+      owner,
+      img,
+      likes: 0, // Inicializar con 0 likes
+    });
+
     // Guardar el nuevo producto en la base de datos
     await nuevoProducto.save();
     // Responder con el producto creado
     res.status(201).json(nuevoProducto);
   } catch (err) {
-    res.status(500).json({ mensaje: 'Error al crear el producto', error: err });
+    res.status(500).json({ message: 'Error al crear el producto', error: err });
   }
 };
 
 /**
- * Función para OBETENER TODOS LOS PRODUCTOS
- * ---------------------------------------
- * Esta función obtiene todos los productos de la base de datos y los devuelve en la respuesta.
+ * Función para OBTENER TODOS LOS PRODUCTOS
+ * -----------------------------------------
+ * Obtiene todos los productos almacenados en la base de datos.
  * Si hay algún error al obtener los productos, se devuelve un mensaje de error con el código 500.
  * @param req petición para obtener los productos
- * @param res respuesta con los productos obtenidos
+ * @param res respuesta con la lista de productos
  */
 export const getProducts = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -45,14 +61,14 @@ export const getProducts = async (req: Request, res: Response): Promise<void> =>
     // Responder con la lista de productos
     res.status(200).json(productos);
   } catch (err) {
-    res.status(500).json({ mensaje: 'Error al obtener los productos', error: err });
+    res.status(500).json({ message: 'Error al obtener los productos', error: err });
   }
 };
 
 /**
  * Función para OBTENER UN PRODUCTO POR SU ID
- * -----------------------------------------
- * Esta función obtiene un producto de la base de datos a partir de su ID y lo devuelve en la respuesta.
+ * ------------------------------------------
+ * Obtiene un producto de la base de datos utilizando su ID.
  * Si el producto no existe, se devuelve un mensaje de error con el código 404.
  * Si hay algún error al obtener el producto, se devuelve un mensaje de error con el código 500.
  * @param req petición con el ID del producto a obtener
@@ -70,20 +86,17 @@ export const getProductById = async (req: Request, res: Response): Promise<void>
     // Responder con el producto encontrado
     res.json(product);
   } catch (error) {
-    res.status(500).json({ message: (error as Error).message });
+    res.status(500).json({ message: 'Error al obtener el producto', error });
   }
 };
 
 /**
  * Función para ACTUALIZAR UN PRODUCTO POR SU ID
- * --------------------------------------------
- * Esta función actualiza un producto de la base de datos a partir de su ID y los datos recibidos
- * en el cuerpo de la petición. Se espera que el cuerpo de la petición contenga un objeto con las
- * propiedades a actualizar del producto.
- * Al actualizar el producto, se devuelve en la respuesta el producto actualizado.
+ * ---------------------------------------------
+ * Actualiza un producto en la base de datos utilizando su ID y los datos proporcionados.
  * Si el producto no existe, se devuelve un mensaje de error con el código 404.
  * Si hay algún error al actualizar el producto, se devuelve un mensaje de error con el código 500.
- * @param req petición con el ID del producto a actualizar y los datos a modificar
+ * @param req petición con los datos actualizados del producto
  * @param res respuesta con el producto actualizado
  */
 export const updateProduct = async (req: Request, res: Response): Promise<void> => {
@@ -98,17 +111,17 @@ export const updateProduct = async (req: Request, res: Response): Promise<void> 
     // Responder con el producto actualizado
     res.json(product);
   } catch (error) {
-    res.status(500).json({ message: (error as Error).message });
+    res.status(500).json({ message: 'Error al actualizar el producto', error });
   }
 };
 
 /**
  * Función para ELIMINAR UN PRODUCTO POR SU ID
- * ------------------------------------------
- * Esta función elimina un producto de la base de datos a partir de su ID.
+ * -------------------------------------------
+ * Elimina un producto de la base de datos utilizando su ID.
  * Si el producto no existe, se devuelve un mensaje de error con el código 404.
  * Si hay algún error al eliminar el producto, se devuelve un mensaje de error con el código 500.
- * @param req petición con el ID del producto a eliminar
+ * @param req petición con el ID del producto a eliminar  
  * @param res respuesta con el mensaje de confirmación
  */
 export const deleteProduct = async (req: Request, res: Response): Promise<void> => {
@@ -123,6 +136,6 @@ export const deleteProduct = async (req: Request, res: Response): Promise<void> 
     // Responder con un mensaje de confirmación
     res.json({ message: 'Producto eliminado' });
   } catch (error) {
-    res.status(500).json({ message: (error as Error).message });
+    res.status(500).json({ message: 'Error al eliminar el producto', error });
   }
 };
