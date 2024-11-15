@@ -12,8 +12,8 @@ import mongoose, { Schema, Document } from 'mongoose';
  * Todos los campos son obligatorios.
  */
 interface User extends Document {
-  Name: string,
-  Surname: string,
+  name: string,
+  surname: string,
   username: string;
   email: string;
   password: string;
@@ -32,6 +32,14 @@ interface User extends Document {
  * - products: lista de identificadores de productos (ObjectId) - opcional
  */
 const userSchema = new Schema<User>({
+  name: {
+    type: String,
+    required: true,
+  },
+  surname: {
+    type: String,
+    required: true,
+  },
   username: {
     type: String,
     required: true,

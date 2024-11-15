@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "dev": "ts-node $(pwd)/src/server.ts"
+    "dev": "tsc; node dist/server.js"
   },
   "keywords": [],
   "author": "",
