@@ -1,22 +1,16 @@
 {
   "compilerOptions": {
-    "target": "ES6",                          // Define la versión de ECMAScript a la que se compilará (ES6 en este caso)
-    "module": "CommonJS",                     // El módulo que se utilizará, CommonJS es común en Node.js
-    "strict": true,                           // Habilita todas las comprobaciones estrictas (opcional pero recomendable)
-    "esModuleInterop": true,                  // Permite importar módulos de manera compatible con CommonJS
-    "skipLibCheck": true,                     // Salta la comprobación de los archivos de definición (.d.ts)
-    "forceConsistentCasingInFileNames": true, // Asegura el uso consistente de mayúsculas/minúsculas en los nombres de los archivos
-    "outDir": "./dist",                       // El directorio de salida donde se guardará el código compilado
-    "rootDir": "./src",                       // El directorio raíz de los archivos fuente
-    "moduleResolution": "node",               // Define cómo se resuelven los módulos (en este caso, con el mecanismo de Node.js)
-    "resolveJsonModule": true,                // Permite importar archivos JSON
-    "isolatedModules": true,                  // Asegura que cada archivo se compila de forma aislada (útil para `ts-node`)
-    "allowJs": true                           // Permite compilar archivos JavaScript junto con TypeScript
+    "target": "ES2020",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "strict": true,
+    "esModuleInterop": true,
+    "baseUrl": "./",
+    "outDir": "./dist",
+    "paths": {
+      "@models/*": ["src/models/*"]
+    }
   },
-  "include": [
-    "src/**/*.ts"  // Define los archivos que deben ser incluidos en el proceso de compilación
-  ],
-  "exclude": [
-    "node_modules"  // Excluye la carpeta node_modules para no ser procesada
-  ]
+  "include": ["src/**/*", "tests/**/*"],
+  "exclude": ["node_modules", "dist"]
 }

@@ -1,9 +1,10 @@
 {
   "name": "back-end",
+  "type": "module",
   "version": "1.0.0",
-  "main": "server.js",
+  "main": "server.ts",
   "scripts": {
-    "dev": "tsc; node dist/server.js --host"
+    "test": "mocha --require ts-node/register tests/**/*spec.ts"
   },
   "keywords": [],
   "author": "",
@@ -16,8 +17,17 @@
     "mongoose": "^8.8.1"
   },
   "devDependencies": {
+    "@types/chai": "^5.0.1",
+    "@types/chai-http": "^3.0.5",
     "@types/express": "^5.0.0",
+    "@types/mocha": "^10.0.9",
     "@types/node": "^22.9.0",
+    "@types/supertest": "^6.0.2",
+    "chai": "^5.1.2",
+    "chai-http": "^5.1.1",
+    "mocha": "^10.8.2",
+    "supertest": "^7.0.0",
+    "ts-node": "^10.9.2",
     "typescript": "^5.6.3"
   }
 }

@@ -3,8 +3,7 @@
 // En este archivo se encuentran las operaciones para los usuarios
 
 import { Request, Response } from 'express';
-import User from '../models/userModel';
-import Product from '../models/productModel';
+import User from '../models/userModel.js';
 
 /**
  * Función para CREAR NUEVO USUARIO

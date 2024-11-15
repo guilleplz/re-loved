@@ -3,7 +3,7 @@
 // En este archivo se encuentran las operaciones para los productos
 
 import { Request, Response } from 'express';
-import Product from '../models/productModel';
+import Product from '../models/productModel.js';
 
 /**
  * Función para CREAR NUEVO PRODUCTO

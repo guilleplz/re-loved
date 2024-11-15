@@ -1,8 +1,8 @@
 import express, { Request, Response, NextFunction } from 'express';
 import dotenv from 'dotenv';
-import connectDB from './config/db';
-import userRoutes from './routes/userRoutes'; // Rutas de usuario
-import productRoutes from './routes/productRoutes'; // Rutas de producto
+import connectDB from './config/db.js';
+import userRoutes from './routes/userRoutes.js'; // Rutas de usuario
+import productRoutes from './routes/productRoutes.js'; // Rutas de producto
 
 // Cargar variables de entorno
 dotenv.config();
@@ -47,3 +47,5 @@ const startServer = async () => {
 };
 
 startServer();
+
+export default app;
