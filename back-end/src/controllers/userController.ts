@@ -4,6 +4,7 @@
 
 import { Request, Response } from 'express';
 import User from '../models/userModel';
+import Product from '../models/productModel';
 
 /**
  * Función para CREAR NUEVO USUARIO
@@ -21,12 +22,10 @@ export const createUser = async (req: Request, res: Response): Promise<void> => 
     const {name, surname, username, email, password, productsInStore, favProducts } = req.body;
 
     // Verificación básica de datos (puedes añadir más validaciones)
-    if (!username || !email || !password) {
+    if (!name || !surname || !username || !email || !password) {
       res.status(400).json({ mensaje: 'Los campos username, email y password son obligatorios.' });
       return;
     }
-
-    console.log(name, surname);
 
     const nuevoUsuario = new User({ name, surname, username, email, password, productsInStore, favProducts });
 
@@ -51,7 +50,7 @@ export const createUser = async (req: Request, res: Response): Promise<void> => 
 export const getUsers = async (req: Request, res: Response): Promise<void> => {
   try {
     // Obtener todos los usuarios de la base de datos
-    const usuarios = await User.find().populate('productsInStore'); // Se pueden obtener los productos relacionados
+    const usuarios = await User.find().populate('productsInStore').populate('favProducts'); // Se pueden obtener los productos relacionados
 
     // Responder con la lista de usuarios
     res.status(200).json(usuarios);
@@ -72,7 +71,7 @@ export const getUsers = async (req: Request, res: Response): Promise<void> => {
 export const getUserById = async (req: Request, res: Response): Promise<void> => {
   try {
     // Buscar usuario por ID, incluyendo los productos relacionados
-    const usuario = await User.findById(req.params.id).populate('products');
+    const usuario = await User.findById(req.params.id).populate('productsInStore').populate('favProducts');
 
     // Si el usuario existe, responder con el usuario
     if (usuario) {
@@ -99,13 +98,15 @@ export const getUserById = async (req: Request, res: Response): Promise<void> =>
  */
 export const updateUser = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { username, email, password, productsInStore, favProducts } = req.body;
+    const {name, surname, username, email, password, productsInStore, favProducts } = req.body;
 
     // Buscar usuario por ID
     const usuario = await User.findById(req.params.id);
 
     // Si el usuario existe, actualizarlo
     if (usuario) {
+      usuario.name = name || usuario.name
+      usuario.surname = surname || usuario.surname
       usuario.username = username || usuario.username;
       usuario.email = email || usuario.email;
       usuario.password = password || usuario.password;
