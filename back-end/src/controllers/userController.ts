@@ -100,27 +100,13 @@ export const updateUser = async (req: Request, res: Response): Promise<void> => 
     const {name, surname, username, email, password, productsInStore, favProducts } = req.body;
 
     // Buscar usuario por ID
-    const usuario = await User.findById(req.params.id);
+    const usuario = await User.findByIdAndUpdate(req.params.id, req.body, {new: true});
 
     // Si el usuario existe, actualizarlo
-    if (usuario) {
-      usuario.name = name || usuario.name
-      usuario.surname = surname || usuario.surname
-      usuario.username = username || usuario.username;
-      usuario.email = email || usuario.email;
-      usuario.password = password || usuario.password;
-      usuario.productsInStore = productsInStore || usuario.productsInStore;
-      usuario.favProducts = favProducts || usuario.favProducts;
-
-      // Guardar los cambios
-      await usuario.save();
-
-      // Responder con el usuario actualizado
-      res.status(200).json(usuario);
-    } else {
-      // Si el usuario no existe, devolver un mensaje de error
+    if (!usuario) {
       res.status(404).json({ mensaje: 'Usuario no encontrado' });
     }
+    res.json(usuario);
   } catch (err) {
     res.status(500).json({ mensaje: 'Error al actualizar el usuario', error: err });
   }
