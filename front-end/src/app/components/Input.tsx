@@ -1,21 +1,19 @@
-import React from "react";
-import styles from "./Input.module.css";
+// Input.tsx
+import React from 'react';
 
 interface InputProps {
+  label: string;
   type: string;
-  placeholder: string;
-  value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export default function Input({ type, placeholder, value, onChange }: InputProps) {
+const Input: React.FC<InputProps> = ({ label, type, onChange }) => {
   return (
-    <input
-      type={type}
-      placeholder={placeholder}
-      value={value}
-      onChange={onChange}
-      className={styles.input}
-    />
+    <div className="input-container">
+      <label>{label}</label>
+      <input type={type} onChange={onChange} />
+    </div>
   );
-}
+};
+
+export default Input;
