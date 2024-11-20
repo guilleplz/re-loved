@@ -2,6 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useRouter } from "next/router";
+import "./styles/signup.module.css";
 
 interface SignUpForm {
   name: string;

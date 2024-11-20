@@ -6,7 +6,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: url('/background-image.jpg') no-repeat center center;
+  background: url('/background.jpg') no-repeat center center;
   background-size: cover;
 }
 
