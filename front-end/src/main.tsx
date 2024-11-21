@@ -1,1 +1,0 @@
-// pagina principal de la aplicacion

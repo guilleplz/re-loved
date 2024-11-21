@@ -1,1 +1,0 @@
-// Página de entrada despues de ser autenticado.

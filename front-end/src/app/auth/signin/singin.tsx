@@ -1,46 +1,45 @@
-import React from "react";
-import styles from "./signin.module.css";
+// src/app/signin/page.tsx
+import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 
 const SignIn = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const router = useRouter();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    // Aquí puedes agregar la lógica para manejar el inicio de sesión
+    // Por ejemplo, llamar a una API para autenticar al usuario
+    // Si la autenticación es exitosa, redirigir al usuario a otra página
+    console.log('Iniciar sesión con:', { email, password });
+    router.push('/dashboard'); // Redirigir al dashboard después de iniciar sesión
+  };
+
   return (
-    <div className={styles.container}>
-      <div className={styles.loginBox}>
-        <h2>Bienvenido de nuevo</h2>
-        <form>
+    <div className="container">
+      <h1>Iniciar sesión</h1>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label>Email:</label>
           <input
             type="email"
-            placeholder="Introduce tu dirección email"
-            className={styles.input}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
           />
+        </div>
+        <div>
+          <label>Contraseña:</label>
           <input
             type="password"
-            placeholder="Introduce tu contraseña"
-            className={styles.input}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
           />
-          <div className={styles.options}>
-            <label>
-              <input type="checkbox" /> Remember me
-            </label>
-            <a href="#" className={styles.forgotPassword}>
-              Forgot password?
-            </a>
-          </div>
-          <button type="submit" className={styles.submitButton}>
-            Iniciar sesión
-          </button>
-        </form>
-        <hr className={styles.separator} />
-        <button className={styles.googleButton}>
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
-            alt="Google icon"
-          />
-          Or sign in with Google
-        </button>
-        <p className={styles.signUp}>
-          Don't have an account? <a href="#">Sign up now</a>
-        </p>
-      </div>
+        </div>
+        <button type="submit">Iniciar sesión</button>
+      </form>
     </div>
   );
 };
