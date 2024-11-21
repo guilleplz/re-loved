@@ -1,102 +1,170 @@
+/* signin.module.css */
+
+/*
+  * Fichero de estilos para el contenedor de la vista de inicio de sesión
+  * Se definen los estilos de los elementos de la vista
+  */
 .container {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   height: 100vh;
-  background: url('https://source.unsplash.com/featured/?abstract') no-repeat center center/cover;
+  width: 100%;
+  background-image: url('/background.jpg');
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat;
 }
 
+/*
+  * En este contenedor se definen los estilos de la caja de inicio de sesión.
+  * la caja tiene un fondo blanco con una opacidad del 80% y un sombreado
+  * se define un ancho máximo de 400px y un ancho del 100%
+  * se aplica un filtro de desenfoque al fondo
+  */
 .loginBox {
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.8); 
   padding: 30px;
-  border-radius: 15px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  width: 400px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 10, 66, 0.2);
+  max-width: 450px;
+  width: 100%;
+  backdrop-filter: blur(10px); 
+}
+
+/*
+  * En este contenedor se definen los estilos del título de la caja de inicio de sesión
+  * el título tiene un tamaño de fuente de 2rem, un color azul oscuro y un margen inferior de 20px
+  */
+.loginBox h2 {
   text-align: center;
-}
-
-h2 {
   margin-bottom: 20px;
-  color: #333;
+  font-size: 2rem;
+  color: #001f3f;
 }
 
+/*
+  * En este contenedor se definen los estilos del formulario de inicio de sesión
+  * el formulario tiene un ancho del 100% y un margen inferior de 15px
+  */
 .input {
   width: 100%;
   padding: 10px;
-  margin: 10px 0;
+  margin-bottom: 15px;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
 
+/*
+  * En este contenedor se definen los estilos de las opciones de inicio de sesión
+  * las opciones tienen un diseño de caja flexible con un espacio entre los elementos
+  * se define un margen inferior de 15px
+  */
 .options {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 14px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
+/*
+  * En este contenedor se definen los estilos del enlace de olvido de contraseña
+  * el enlace tiene un color azul oscuro y no tiene decoración
+  */
 .forgotPassword {
+  color: #002d5d;
   text-decoration: none;
-  color: #007bff;
 }
 
+/*
+  * En este contenedor se definen los estilos del enlace de olvido de contraseña al pasar el cursor sobre él
+  * el enlace subrayado
+  */
 .forgotPassword:hover {
   text-decoration: underline;
 }
 
+/*
+  * En este contenedor se definen los estilos del botón de envío del formulario
+  * el botón tiene un ancho del 100%, un fondo azul oscuro, un color blanco, un relleno de 10px, 
+  * sin borde, un radio de borde de 5px y un cursor de puntero
+  */
 .submitButton {
-  background-color: #003366;
+  width: 100%;
+  background: #002b58;
   color: white;
+  padding: 10px;
   border: none;
-  padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
-  width: 100%;
-  font-size: 16px;
 }
 
+/*
+  * En este contenedor se definen los estilos del botón de envío del formulario al pasar el cursor sobre él
+  * el botón tiene un fondo azul oscuro más oscuro
+  */
 .submitButton:hover {
-  background-color: #004080;
+  background: #001224;
 }
 
+/*
+  * En este contenedor se definen los estilos del separador
+  * el separador tiene un margen superior e inferior de 20px, sin borde y un borde superior de 1px sólido de color gris
+  */
 .separator {
-  border: none;
-  height: 1px;
-  background: #ddd;
   margin: 20px 0;
+  border: none;
+  border-top: 1px solid #ccc;
 }
 
+/*
+  * En este contenedor se definen los estilos del botón de inicio de sesión con Google
+  * el botón tiene un diseño de caja flexible con un espacio entre los elementos
+  * se define un margen inferior de 15px
+  */
 .googleButton {
-  background-color: #ffffff;
-  color: #333;
-  border: 1px solid #ccc;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  font-size: 16px;
+  background: #001f3f; 
+  color: white; 
+  border: 1px solid #ccc;
+  padding: 10px;
+  width: 100%;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
-.googleButton:hover {
-  background-color: #f5f5f5;
+/*
+  * En este contenedor se definen los estilos del botón de inicio de sesión con Google al pasar el cursor sobre él
+  * el botón tiene un fondo azul oscuro más oscuro
+  */
+.googleButton img {
+  margin-right: 10px;
 }
 
+/*
+  * En este contenedor se definen los estilos del enlace de registro
+  * el enlace tiene un margen superior de 20px y un texto centrado
+  */
 .signUp {
-  font-size: 14px;
   margin-top: 20px;
+  text-align: center;
 }
 
+/*
+  * En este contenedor se definen los estilos del enlace de registro
+  * el enlace tiene un color azul oscuro y no tiene decoración
+  */
 .signUp a {
-  color: #007bff;
+  color: #00244b;
   text-decoration: none;
 }
 
+/*
+  * En este contenedor se definen los estilos del enlace de registro al pasar el cursor sobre él
+  * el enlace subrayado
+  */
 .signUp a:hover {
   text-decoration: underline;
 }

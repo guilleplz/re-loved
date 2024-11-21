@@ -1,3 +1,119 @@
-/**
-* modulo de estilos para el componente de registro
-*/
+/* signup.module.css */
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  background-image: url('/background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.signupBox {
+  background: rgba(255, 255, 255, 0.8); /* Fondo blanco translúcido */
+  padding: 30px;
+  border-radius: 15px; /* Bordes redondeados */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  max-width: 450px;
+  width: 100%;
+  backdrop-filter: blur(10px); /* Aplica un desenfoque al fondo */
+}
+
+.signupBox h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 2rem;
+  color: #001f3f;
+}
+
+.input {
+  width: calc(100% - 20px); /* Ajusta el ancho para que sea simétrico */
+  padding: 10px;
+  margin: 10px; /* Añade margen para simetría */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.submitButton {
+  width: 100%;
+  background: #002b58; /* Azul oscuro */
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.submitButton:hover {
+  background: #001224; /* Azul más oscuro */
+}
+
+.separator {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.separator hr {
+  flex: 1;
+  border: none;
+  border-top: 1px solid #ccc;
+}
+
+.separator span {
+  margin: 0 10px;
+  color: #666;
+}
+
+.googleButton, .facebookButton {
+  width: 100%;
+  background: #002b58; /* Azul de Google */
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 25px; /* Bordes redondeados */
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.googleButton img, .facebookButton img {
+  margin-right: 10px;
+}
+
+.googleButton:hover {
+  background: #2d4373; /* Azul más oscuro de Google */
+}
+
+.facebookButton {
+  background: #3b5998; /* Azul de Facebook */
+}
+
+.facebookButton:hover {
+  background: #2d4373; /* Azul más oscuro de Facebook */
+}
+
+.signIn {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.signIn a {
+  color: #007bff; /* Azul */
+  text-decoration: none;
+}
+
+.signIn a:hover {
+  text-decoration: underline;
+}
