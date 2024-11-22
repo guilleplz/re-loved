@@ -6,6 +6,7 @@
   align-items: center;
   height: 100vh;
   width: 100%;
+  padding: 20px;
   background-image: url('/background.jpg');
   background-size: cover;
   background-position: center;
@@ -14,17 +15,20 @@
 
 .signupBox {
   background: rgba(255, 255, 255, 0.8); /* Fondo blanco translúcido */
-  padding: 30px;
-  border-radius: 15px; /* Bordes redondeados */
+  padding: 20px;
+  border-radius: 10px; /* Bordes redondeados */
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  max-width: 450px;
+  max-width: 400px;
   width: 100%;
   backdrop-filter: blur(10px); /* Aplica un desenfoque al fondo */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .signupBox h2 {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   font-size: 2rem;
   color: #001f3f;
 }
@@ -48,32 +52,15 @@
   font-size: 1rem;
   cursor: pointer;
   transition: background 0.3s ease;
+  margin-top: 10px;
 }
 
 .submitButton:hover {
   background: #001224; /* Azul más oscuro */
 }
 
-.separator {
-  display: flex;
-  align-items: center;
-  text-align: center;
-  margin: 20px 0;
-}
-
-.separator hr {
-  flex: 1;
-  border: none;
-  border-top: 1px solid #ccc;
-}
-
-.separator span {
-  margin: 0 10px;
-  color: #666;
-}
-
 .signIn {
-  margin-top: 20px;
+  margin-top: 15px;
   text-align: center;
 }
 

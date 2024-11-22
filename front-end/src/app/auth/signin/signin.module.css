@@ -118,17 +118,24 @@
   margin: 20px 0;
 }
 
+/**
+  * En este contenedor se definen los estilos del separador
+  * el separador tiene un margen superior e inferior de 20px, sin borde y un borde superior de 1px sólido de color gris
+  */
 .separator hr {
   flex: 1;
   border: none;
   border-top: 1px solid #ccc;
 }
 
+/**
+  * En este contenedor se definen los estilos del texto del separador
+  * el texto tiene un margen de 10px y un color gris
+  */
 .separator span {
   margin: 0 10px;
   color: #666;
 }
-
 
 /*
   * En este contenedor se definen los estilos del enlace de registro
