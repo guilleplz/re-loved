@@ -13,7 +13,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="es">
       <body>
         <header>
         <div className="logo">Re-Loved</div>
@@ -25,7 +25,7 @@ export default function RootLayout({
           </nav>
         </header>
         <main>{children}</main>
-        <footer>© {new Date().getFullYear()}</footer>
+        <footer> footer </footer>
       </body>
     </html>
   );
