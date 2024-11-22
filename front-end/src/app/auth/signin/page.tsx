@@ -1,7 +1,7 @@
 // src/app/auth/signin/page.tsx
 "use client"; // Marca este componente como un componente del lado del cliente
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation'; // Para la carpeta "app", usa 'next/navigation'
 import Link from 'next/link';
 import styles from './signin.module.css';
