@@ -112,36 +112,23 @@
   * el separador tiene un margen superior e inferior de 20px, sin borde y un borde superior de 1px sólido de color gris
   */
 .separator {
+  display: flex;
+  align-items: center;
+  text-align: center;
   margin: 20px 0;
+}
+
+.separator hr {
+  flex: 1;
   border: none;
   border-top: 1px solid #ccc;
 }
 
-/*
-  * En este contenedor se definen los estilos del botón de inicio de sesión con Google
-  * el botón tiene un diseño de caja flexible con un espacio entre los elementos
-  * se define un margen inferior de 15px
-  */
-.googleButton {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #001f3f; 
-  color: white; 
-  border: 1px solid #ccc;
-  padding: 10px;
-  width: 100%;
-  border-radius: 5px;
-  cursor: pointer;
+.separator span {
+  margin: 0 10px;
+  color: #666;
 }
 
-/*
-  * En este contenedor se definen los estilos del botón de inicio de sesión con Google al pasar el cursor sobre él
-  * el botón tiene un fondo azul oscuro más oscuro
-  */
-.googleButton img {
-  margin-right: 10px;
-}
 
 /*
   * En este contenedor se definen los estilos del enlace de registro
