@@ -1,7 +1,7 @@
 
 "use client"; // Marca este componente como un componente del lado del cliente
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/navigation'; 
 import Link from 'next/link';
 import styles from './signup.module.css'; 
@@ -19,7 +19,6 @@ const SignUp = () => {
       return;
     }
     console.log('Registrarse con:', { email, password });
-    // Aquí podrías enviar los datos a tu backend para registrar el usuario
     router.push('/dashboard'); // Redirige al dashboard tras registrarse
   };
 
