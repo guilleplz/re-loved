@@ -4,7 +4,16 @@
 
 import { Request, Response } from 'express';
 import User from '../models/userModel.js';
+import bcrypt from 'bcryptjs'
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+dotenv.config();
 
+const JWT_SECRET = process.env.JWT_SECRET;
+const JWT_EXPIRATION = process.env.JWT_EXPIRATION;
+if (!JWT_SECRET) {
+  throw new Error('Las variables de entorno JWT_SECRET o JWT_EXPIRATION no están definidas');
+}
 /**
  * Función para CREAR NUEVO USUARIO
  * -----------------------------------
@@ -20,16 +29,21 @@ export const createUser = async (req: Request, res: Response): Promise<void> => 
   try {
     const {name, surname, username, email, password, productsInStore, favProducts } = req.body;
 
-    // Verificación básica de datos (puedes añadir más validaciones)
-    if (!name || !surname || !username || !email || !password) {
-      res.status(400).json({ mensaje: 'Los campos username, email y password son obligatorios.' });
-      return;
-    }
+    // Verificar si el usuario ya existe
+    const existingUser = await User.findOne({ username });
+    if (existingUser) {
+      res.status(400).json({ message: 'Usuario ya existe' });
+    } 
 
-    const nuevoUsuario = new User({ name, surname, username, email, password, productsInStore, favProducts });
+    const hashedPassword = await bcrypt.hash(password, 10)
+
+    const nuevoUsuario = new User({ name, surname, username, email, password: hashedPassword, productsInStore, favProducts });
 
     // Guardar el nuevo usuario en la base de datos
     await nuevoUsuario.save();
+
+    // Generar el JWT
+    const token = jwt.sign({ id: nuevoUsuario._id }, JWT_SECRET, { expiresIn: JWT_EXPIRATION });
 
     // Responder con el usuario creado
     res.status(201).json(nuevoUsuario);

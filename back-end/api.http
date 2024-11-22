@@ -1,0 +1,27 @@
+POST http://localhost:8080/api/users/
+content-type: application/json
+
+{
+    "name": "Erik",
+    "surname": "Bermudez",
+    "username": "erikkk",
+    "email": "erik@gmail.com",
+    "password": "erikelmejor",
+    "productsInStore": [],
+    "favProducts": []
+}
+
+###
+
+POST http://localhost:8080/api/users/
+content-type: application/json
+
+{
+    "name": "Alba",
+    "surname": "No",
+    "username": "albano",
+    "email": "albano@gmail.com",
+    "password": "albanoelmejor",
+    "productsInStore": [],
+    "favProducts": []
+}
