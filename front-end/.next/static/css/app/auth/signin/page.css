@@ -1,0 +1,169 @@
+/*!*********************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[3]!./src/app/auth/signin/signin.module.css ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************/
+/* signin.module.css */
+
+/*
+  * Fichero de estilos para el contenedor de la vista de inicio de sesión
+  * Se definen los estilos de los elementos de la vista
+  */
+.signin_container__4M3ZY {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  background-image: url('/background.jpg');
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat;
+}
+
+/*
+  * En este contenedor se definen los estilos de la caja de inicio de sesión.
+  * la caja tiene un fondo blanco con una opacidad del 80% y un sombreado
+  * se define un ancho máximo de 400px y un ancho del 100%
+  * se aplica un filtro de desenfoque al fondo
+  */
+.signin_loginBox__V7j6j {
+  background: rgba(255, 255, 255, 0.8); 
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 10, 66, 0.2);
+  max-width: 450px;
+  width: 100%;
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px); 
+}
+
+/*
+  * En este contenedor se definen los estilos del título de la caja de inicio de sesión
+  * el título tiene un tamaño de fuente de 2rem, un color azul oscuro y un margen inferior de 20px
+  */
+.signin_loginBox__V7j6j h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 2rem;
+  color: #001f3f;
+}
+
+/*
+  * En este contenedor se definen los estilos del formulario de inicio de sesión
+  * el formulario tiene un ancho del 100% y un margen inferior de 15px
+  */
+.signin_input__9V5lq {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/*
+  * En este contenedor se definen los estilos de las opciones de inicio de sesión
+  * las opciones tienen un diseño de caja flexible con un espacio entre los elementos
+  * se define un margen inferior de 15px
+  */
+.signin_options__ZbP7G {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+/*
+  * En este contenedor se definen los estilos del enlace de olvido de contraseña
+  * el enlace tiene un color azul oscuro y no tiene decoración
+  */
+.signin_forgotPassword__Mfiv4 {
+  color: #002d5d;
+  text-decoration: none;
+}
+
+/*
+  * En este contenedor se definen los estilos del enlace de olvido de contraseña al pasar el cursor sobre él
+  * el enlace subrayado
+  */
+.signin_forgotPassword__Mfiv4:hover {
+  text-decoration: underline;
+}
+
+/*
+  * En este contenedor se definen los estilos del botón de envío del formulario
+  * el botón tiene un ancho del 100%, un fondo azul oscuro, un color blanco, un relleno de 10px, 
+  * sin borde, un radio de borde de 5px y un cursor de puntero
+  */
+.signin_submitButton__r99mx {
+  width: 100%;
+  background: #002b58;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/*
+  * En este contenedor se definen los estilos del botón de envío del formulario al pasar el cursor sobre él
+  * el botón tiene un fondo azul oscuro más oscuro
+  */
+.signin_submitButton__r99mx:hover {
+  background: #001224;
+}
+
+/*
+  * En este contenedor se definen los estilos del separador
+  * el separador tiene un margen superior e inferior de 20px, sin borde y un borde superior de 1px sólido de color gris
+  */
+.signin_separator__s5itw {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 20px 0;
+}
+
+/**
+  * En este contenedor se definen los estilos del separador
+  * el separador tiene un margen superior e inferior de 20px, sin borde y un borde superior de 1px sólido de color gris
+  */
+.signin_separator__s5itw hr {
+  flex: 1;
+  border: none;
+  border-top: 1px solid #ccc;
+}
+
+/**
+  * En este contenedor se definen los estilos del texto del separador
+  * el texto tiene un margen de 10px y un color gris
+  */
+.signin_separator__s5itw span {
+  margin: 0 10px;
+  color: #666;
+}
+
+/*
+  * En este contenedor se definen los estilos del enlace de registro
+  * el enlace tiene un margen superior de 20px y un texto centrado
+  */
+.signin_signUp___V0jg {
+  margin-top: 20px;
+  text-align: center;
+}
+
+/*
+  * En este contenedor se definen los estilos del enlace de registro
+  * el enlace tiene un color azul oscuro y no tiene decoración
+  */
+.signin_signUp___V0jg a {
+  color: #00244b;
+  text-decoration: none;
+}
+
+/*
+  * En este contenedor se definen los estilos del enlace de registro al pasar el cursor sobre él
+  * el enlace subrayado
+  */
+.signin_signUp___V0jg a:hover {
+  text-decoration: underline;
+}
+
