@@ -1,13 +1,8 @@
 
 "use client"; // Marca este componente como un componente del lado del cliente
 
-<<<<<<< HEAD
 import { useState } from 'react';
-import { useRouter } from 'next/navigation'; // Para la carpeta "app", usa 'next/navigation'
-=======
-import React, { useState } from 'react';
 import { useRouter } from 'next/navigation'; 
->>>>>>> 2b00a68c76b0753fd17d450945e3d708aa4c2c32
 import Link from 'next/link';
 import styles from './signup.module.css'; 
 
