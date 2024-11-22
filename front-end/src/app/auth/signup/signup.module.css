@@ -72,38 +72,6 @@
   color: #666;
 }
 
-.googleButton, .facebookButton {
-  width: 100%;
-  background: #002b58; /* Azul de Google */
-  color: white;
-  padding: 12px;
-  border: none;
-  border-radius: 25px; /* Bordes redondeados */
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 10px;
-}
-
-.googleButton img, .facebookButton img {
-  margin-right: 10px;
-}
-
-.googleButton:hover {
-  background: #2d4373; /* Azul más oscuro de Google */
-}
-
-.facebookButton {
-  background: #3b5998; /* Azul de Facebook */
-}
-
-.facebookButton:hover {
-  background: #2d4373; /* Azul más oscuro de Facebook */
-}
-
 .signIn {
   margin-top: 20px;
   text-align: center;

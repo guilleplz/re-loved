@@ -1,10 +1,10 @@
-// src/app/auth/signup/page.tsx
+
 "use client"; // Marca este componente como un componente del lado del cliente
 
 import React, { useState } from 'react';
-import { useRouter } from 'next/navigation'; // Para la carpeta "app", usa 'next/navigation'
+import { useRouter } from 'next/navigation'; 
 import Link from 'next/link';
-import styles from './signup.module.css'; // Asegúrate de que la importación sea correcta
+import styles from './signup.module.css'; 
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
@@ -56,19 +56,6 @@ const SignUp = () => {
             Registrarse
           </button>
         </form>
-        <div className={styles.separator}>
-          <hr />
-          <span>o</span>
-          <hr />
-        </div>
-        <button className={styles.googleButton}>
-          <img src="/google-icon.svg" alt="Google" width="20" />
-          Registrarse con Google
-        </button>
-        <button className={styles.facebookButton}>
-          <img src="/facebook-icon.webp" alt="Facebook" width="20" />
-          Registrarse con Facebook
-        </button>
         <div className={styles.signIn}>
           ¿Ya tienes una cuenta? <Link href="/auth/signin">Inicia sesión aquí</Link>
         </div>
