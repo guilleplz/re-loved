@@ -1,1 +1,0 @@
-// Aqui tendremos el componente Input que se encarga de mostrar un input en la aplicación
