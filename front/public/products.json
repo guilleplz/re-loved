@@ -1,0 +1,124 @@
+{
+  "productos": [
+    {
+      "nombre": "Camisa verde a rayas",
+      "precio": 24,
+      "categoria": "Moda",
+      "imagen": "images/camisa_verde.png"
+    },
+    {
+      "nombre": "Bicicleta de carbono",
+      "precio": 240,
+      "categoria": "Novedades",
+      "imagen": "images/camisa_verde.png"
+    },
+    {
+      "nombre": "Televisión",
+      "precio": 50,
+      "categoria": "Tecnologías",
+      "imagen": "images/camisa_verde.png"
+    },
+    {
+      "nombre": "Zapatos elegantes",
+      "precio": 18,
+      "categoria": "Moda",
+      "imagen": "images/camisa_verde.png"
+    },
+    {
+      "nombre": "Teléfono marca X",
+      "precio": 300,
+      "categoria": "Tecnologías",
+      "imagen": "images/camisa_verde.png"
+    },
+    {
+      "nombre": "Camisetas",
+      "precio": 15,
+      "categoria": "Moda",
+      "imagen": "images/camisa_verde.png"
+    },
+    {
+      "nombre": "Pantalones",
+      "precio": 30,
+      "categoria": "Moda",
+      "imagen": "images/camisa_verde.png"
+    },
+    {
+      "nombre": "Chaquetas",
+      "precio": 50,
+      "categoria": "Moda",
+      "imagen": "images/camisa_verde.png"
+    },
+    {
+      "nombre": "Zapatos deportivos",
+      "precio": 40,
+      "categoria": "Moda",
+      "imagen": "images/camisa_verde.png"
+    },
+    {
+      "nombre": "Bufandas",
+      "precio": 12,
+      "categoria": "Moda",
+      "imagen": "images/camisa_verde.png"
+    },
+    {
+      "nombre": "Teléfonos",
+      "precio": 250,
+      "categoria": "Tecnologías",
+      "imagen": "images/camisa_verde.png"
+    },
+    {
+      "nombre": "Ordenadores",
+      "precio": 700,
+      "categoria": "Tecnologías",
+      "imagen": "images/camisa_verde.png"
+    },
+    {
+      "nombre": "Televisores",
+      "precio": 400,
+      "categoria": "Tecnologías",
+      "imagen": "images/camisa_verde.png"
+    },
+    {
+      "nombre": "Tablets",
+      "precio": 300,
+      "categoria": "Tecnologías",
+      "imagen": "images/camisa_verde.png"
+    },
+    {
+      "nombre": "Portátiles",
+      "precio": 800,
+      "categoria": "Tecnologías",
+      "imagen": "images/camisa_verde.png"
+    },
+    {
+      "nombre": "Sofás",
+      "precio": 200,
+      "categoria": "Hogar y jardinería",
+      "imagen": "images/camisa_verde.png"
+    },
+    {
+      "nombre": "Sillas",
+      "precio": 50,
+      "categoria": "Hogar y jardinería",
+      "imagen": "images/camisa_verde.png"
+    },
+    {
+      "nombre": "Armarios",
+      "precio": 150,
+      "categoria": "Hogar y jardinería",
+      "imagen": "images/camisa_verde.png"
+    },
+    {
+      "nombre": "Estanterías",
+      "precio": 70,
+      "categoria": "Hogar y jardinería",
+      "imagen": "images/camisa_verde.png"
+    },
+    {
+      "nombre": "Cajoneras",
+      "precio": 60,
+      "categoria": "Hogar y jardinería",
+      "imagen": "images/camisa_verde.png"
+    }
+  ]
+}

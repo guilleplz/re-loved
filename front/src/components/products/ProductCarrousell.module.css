@@ -1,0 +1,120 @@
+.carrousell_start {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  overflow-x: hidden;
+  width: 100%;
+  transition: all ease-in-out 0.5s;
+  height: 30vh;
+  align-items: center;
+}
+
+.carrousell_start::after {
+  content: "";
+  height: 100%;
+  width: 10rem;
+  position: absolute;
+  right: 0rem;  
+  background: linear-gradient(90deg, transparent, #dfe1e6 97%);
+  z-index: 10;
+}
+
+
+
+
+.carrousell {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  overflow-x: hidden;
+  width: 100%;
+  transition: all ease-in-out 0.5s;
+  height: 30vh;
+  align-items: center;
+}
+
+.carrousell::after {
+  content: "";
+  height: 100%;
+  width: 10rem;
+  position: absolute;
+  right: 0rem;  
+  background: linear-gradient(90deg, transparent, #dfe1e6 97%);
+  z-index: 10;
+}
+
+.carrousell::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  height: 100%;
+  width: 10rem;
+  background: linear-gradient(90deg, #dfe1e6, transparent 50%);
+  z-index: 10;
+}
+
+.title {
+  font-family: quicksand;
+  font-weight: normal;
+  font-size: 4vh;
+}
+
+.right_button {
+  border-radius: 100%;
+  width: 75px;
+  height: 75px;
+  display: flex;
+  align-items: center;
+  place-content: center;
+  border: none;
+  background-color: transparent;
+  backdrop-filter: blur(20px) saturate(125%);
+  position: absolute;
+  top: 36%;
+  right: 3%;
+  transform: rotate(-90deg);
+  z-index: 100;
+  cursor: pointer;
+  transition: transform ease-in-out 0.2s;
+}
+
+.right_button_hidden {
+  display: none;
+}
+
+.left_button {
+  border-radius: 100%;
+  width: 75px;
+  height: 75px;
+  display: flex;
+  align-items: center;
+  place-content: center;
+  border: none;
+  background-color: transparent;
+  backdrop-filter: blur(20px) saturate(125%);
+  position: absolute;
+  top: 36%;
+  left: 0;
+  transform: rotate(90deg);
+  z-index: 100;
+  cursor: pointer;
+  transition: transform ease-in-out 0.2s;
+}
+
+.left_button_hidden {
+  display: none;
+}
+
+.left_button:hover {
+  transform: scale(1.1) rotate(90deg);
+}
+
+.right_button:hover {
+  transform: scale(1.1) rotate(-90deg);
+}
+
+.slide {
+  display: flex;
+  gap: 4vh;
+  transition: transform ease-in-out 0.5s;
+}

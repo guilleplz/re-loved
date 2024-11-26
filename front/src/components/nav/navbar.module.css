@@ -1,0 +1,125 @@
+.nav {
+  position: fixed;
+  background-color: var(--brand-dark-blue);
+  width: 100%;
+  height: 7vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  z-index: 10000;
+}
+
+.logo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: left;
+  gap: 3vh;
+
+  & a {
+    cursor: pointer;
+  }
+}
+
+.hamburguer_menu {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: transform ease-in-out 0.2s;
+
+  &:hover {
+    transform: scale(1.06);
+  }
+}
+
+.dropdown_hidden {
+  display: none;
+  position: absolute;
+  background-color: #ffff;
+  min-width: 400px;
+  min-height: 500px;
+  top: 7vh;
+  left: 0;
+  color: black;
+
+  & ul li {
+    list-style: none;
+    height: 3vh;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding-left: 2vh;
+
+    &:hover {
+      background-color: #bebcbc;
+    }
+  }
+}
+
+.dropdown {
+  position: absolute;
+  background-color: #ffff;
+  min-width: 400px;
+  min-height: 500px;
+  top: 7vh;
+  left: 0;
+  color: black;
+
+  & ul li {
+    list-style: none;
+    height: 3vh;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding-left: 2vh;
+
+    &:hover {
+      background-color: #bebcbc;
+    }
+  }
+}
+
+
+.hamburguer {
+  pointer-events: none;
+}
+
+.form {
+  position: relative;
+}
+
+.input_text {
+  height: 4vh;
+  width: 50vh;
+  background-color: #ffff;
+  border: none;
+  border-radius: 30px;
+  margin-right: 4vh;
+  color: black;
+  padding-left: 20px;
+  padding-right: 50px;
+}
+
+.input_button {
+  position: absolute;
+  right: 5vh;
+  bottom: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.form_side {
+  display: flex;
+  flex-direction: row;
+}
+
+.log_buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 2vh;
+}

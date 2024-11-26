@@ -1,0 +1,91 @@
+.background {
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("/images/sing-in-image.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100vw;
+  height: 93vh;
+}
+
+.section {
+  height: 60vh;
+  width: 45rem;
+  background-color: rgba(255, 255, 255, 0.39);
+  backdrop-filter: blur(20px) saturate(125%);
+  margin: 5rem;
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 30px;
+
+  & h3 {
+    font-family: quicksand;
+    font-size: 2.5rem;
+    font-weight: bold;
+  }
+}
+
+.form {
+  margin-top: 4vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+
+  & input {
+    border-radius: 10px;
+    background-color: transparent;
+
+    border: solid 1px rgb(61, 61, 61);
+    height: 5vh;
+    width: 17vw;
+    color: black;
+
+    padding-left: 1rem;
+
+    &::placeholder {
+      color: rgb(61, 61, 61);
+    }
+
+    &:focus {
+      border-color: rgb(255, 255, 255);
+      outline: none;
+    }
+  }
+
+  & .remember {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 0;
+    gap: 10;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+
+    & input {
+      width: 15px;
+    }
+  }
+}
+
+.submit_button {
+  height: 3rem;
+  width: 100%;
+  font-family: quicksand;
+  font-size: large;
+  background-color: var(--brand-dark-blue);
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: transform ease-in-out 0.2s;
+
+  &:hover {
+    transform: scale(1.03);
+  }
+}
