@@ -14,6 +14,81 @@ const JWT_EXPIRATION = process.env.JWT_EXPIRATION;
 if (!JWT_SECRET) {
   throw new Error('Las variables de entorno JWT_SECRET o JWT_EXPIRATION no están definidas');
 }
+
+
+/**
+ * -----------------------------------------------------------
+ * INICIAR SESION DE UN USUARIO
+ * -----------------------------------------------------------
+ * 
+ * 
+ */
+export const signIn = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { email, password } = req.body;
+    // Buscar el usuario por su email
+    const user = await User.findOne({ email });
+    if (!user) {
+      res.status(404).json({ message: 'Usuario no encontrado' });
+      return;
+    }
+    // Verificar la contraseña
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      res.status(400).json({ message: 'Contraseña incorrecta' });
+      return;
+    }
+    // Generar el token JWT
+    const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: '1h' });
+    // Enviar la respuesta con el token
+    res.status(200).json({ message: 'Inicio de sesión exitoso', token });
+  } catch (err) {
+    res.status(500).json({ message: 'Error al iniciar sesión', error: err });
+  }
+};
+
+
+/**
+ * -----------------------------------------------------------
+ * REGISTRAR UN NUEVO USUARIO
+ * -----------------------------------------------------------
+ */
+export const signUp = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { email, name, surname, username, password, confirmPassword } = req.body;
+    // Validar que la contraseña y la confirmación coincidan
+    if (password !== confirmPassword) {
+      res.status(400).json({ message: 'Las contraseñas no coinciden' });
+      return;
+    }
+    // Verificar si el usuario ya existe
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      res.status(400).json({ message: 'El email ya está registrado' });
+      return;
+    }
+    // Encriptar la contraseña
+    const hashedPassword = await bcrypt.hash(password, 10);
+    // Crear el nuevo usuario
+    const newUser = new User({
+      email,
+      name,
+      surname,
+      username,
+      password: hashedPassword,
+    });
+    // Guardar el usuario en la base de datos
+    await newUser.save();
+    // Generar el token JWT
+    const token = jwt.sign({ id: newUser._id }, JWT_SECRET, { expiresIn: '1h' });
+    // Enviar la respuesta con el token
+    res.status(201).json({ message: 'Usuario registrado exitosamente', token });
+  } catch (err) {
+    res.status(500).json({ message: 'Error al registrar el usuario', error: err });
+  }
+};
+
+
 /**
  * Función para CREAR NUEVO USUARIO
  * -----------------------------------
