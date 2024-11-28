@@ -29,7 +29,7 @@ const signIn = () => {
 
     // Lógica con el backend
     try {
-      const response = await fetch("http://localhost:3000/api/auth/signin", {
+      const response = await fetch("http://localhost:8080/api/users/signin", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -39,7 +39,6 @@ const signIn = () => {
       });
 
       const data = await response.json();
-
       if (response.ok) {
         // Guardar el token en localStorage o manejar sesión
         localStorage.setItem("token", data.token);

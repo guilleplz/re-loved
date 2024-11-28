@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./page.module.css";
 import SignUpFormIndicator from "./_components/SignUpFormIndicator";
 import Link from "next/link";
+import { useRouter } from "next/navigation"; 
 
 type SignUpForm = {
   email: string;
@@ -25,14 +26,27 @@ const SignUp = () => {
   });
   const [step, setStep] = useState(0);
   const [error, setError] = useState<string | null>(null); // Definir setError
+  const [isClient, setIsClient] = useState(false);  // Para asegurar que solo usamos el router en el cliente
+  const router = useRouter();  // Instancia de router para redirección
+
+  useEffect(() => {
+    setIsClient(true); // Activar solo en el cliente
+  }, []);
 
   // Función asincrónica para el manejo del submit
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     // Desestructuración del formData
-    const { email, password, name, surname, username } = formData;
+    const { email, password, name, surname, username, confirmPassword } = formData;
+
+    // Validación de que las contraseñas coincidan
+    if (password !== confirmPassword) {
+      setError("Las contraseñas no coinciden");
+      return;
+    }
+
     try {
-      const response = await fetch("http://localhost:3000/api/auth/signup", {
+      const response = await fetch("http://localhost:8080/api/users/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, name, surname, username, password }),
@@ -41,6 +55,9 @@ const SignUp = () => {
 
       if (response.ok) {
         // Redirigir al login o mostrar un mensaje de éxito
+        if (isClient) {
+          router.push("/sign-in");  // Redirige a la página de inicio de sesión
+        }
       } else {
         setError(data.message || "Error al registrarse");
       }
@@ -58,7 +75,7 @@ const SignUp = () => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: value, 
+      [name]: value,
     });
   };
 
@@ -86,6 +103,7 @@ const SignUp = () => {
               placeholder="Introduce tu email"
               value={formData.email}
               onChange={handleChange}
+              required
             />
           )}
 
@@ -98,6 +116,7 @@ const SignUp = () => {
                 placeholder="Nombre"
                 value={formData.name}
                 onChange={handleChange}
+                required
               />
               <input
                 type="text"
@@ -106,6 +125,7 @@ const SignUp = () => {
                 placeholder="Apellido"
                 value={formData.surname}
                 onChange={handleChange}
+                required
               />
               <input
                 type="text"
@@ -114,6 +134,7 @@ const SignUp = () => {
                 placeholder="Nombre de usuario"
                 value={formData.username}
                 onChange={handleChange}
+                required
               />
             </>
           )}
@@ -133,6 +154,7 @@ const SignUp = () => {
                 placeholder="Introduce tu contraseña"
                 value={formData.password}
                 onChange={handleChange}
+                required
               />
               <input
                 type="password"
@@ -141,6 +163,7 @@ const SignUp = () => {
                 placeholder="Confirma la contraseña"
                 value={formData.confirmPassword}
                 onChange={handleChange}
+                required
               />
               <button className={styles.submit_button} type="submit">
                 Registrarse
