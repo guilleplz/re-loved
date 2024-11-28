@@ -20,8 +20,10 @@ if (!JWT_SECRET) {
  * -----------------------------------------------------------
  * INICIAR SESION DE UN USUARIO
  * -----------------------------------------------------------
- * 
- * 
+ * Esta funcion lo que hace es verificar si el usuario existe en la base de datos y si la contraseña es correcta
+ * Primero se busca el usuario por su email, si no existe se devuelve un mensaje de error
+ * Luego se verifica la contraseña, si no coincide se devuelve un mensaje de error
+ * Si todo es correcto se genera un token JWT y se envia en la respuesta
  */
 export const signIn = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -52,6 +54,11 @@ export const signIn = async (req: Request, res: Response): Promise<void> => {
  * -----------------------------------------------------------
  * REGISTRAR UN NUEVO USUARIO
  * -----------------------------------------------------------
+ * Esta funcion lo que hace es registrar un nuevo usuario en la base de datos
+ * Primero se verifica que la contraseña y la confirmacion coincidan
+ * Luego se verifica si el usuario ya existe, si ya existe se devuelve un mensaje de error
+ * Si todo es correcto se encripta la contraseña y se guarda el usuario en la base de datos
+ * Se genera un token JWT y se envia en la respuesta
  */
 export const signUp = async (req: Request, res: Response): Promise<void> => {
   try {
