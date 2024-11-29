@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import styles from "./page.module.css";
+import { useRouter } from "next/navigation"; 
 
 type LoginForm = {
   email: string;
@@ -16,6 +17,7 @@ const signIn = () => {
     remember: false,
   });
   const [error, setError] = useState<string | null>(null);
+  const router = useRouter()
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -42,6 +44,8 @@ const signIn = () => {
       if (response.ok) {
         // Guardar el token en localStorage o manejar sesión
         localStorage.setItem("token", data.token);
+        router.push("/dashboard")
+        
         // Redirigir o hacer cualquier acción después de iniciar sesión
       } else {
         setError(data.message || "Error en el inicio de sesión");

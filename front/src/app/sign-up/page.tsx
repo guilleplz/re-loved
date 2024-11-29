@@ -5,6 +5,7 @@ import styles from "./page.module.css";
 import SignUpFormIndicator from "./_components/SignUpFormIndicator";
 import Link from "next/link";
 import { useRouter } from "next/navigation"; 
+import bcrypt from 'bcryptjs'
 
 type SignUpForm = {
   email: string;
@@ -39,17 +40,21 @@ const SignUp = () => {
     // Desestructuración del formData
     const { email, password, name, surname, username, confirmPassword } = formData;
 
+
     // Validación de que las contraseñas coincidan
     if (password !== confirmPassword) {
       setError("Las contraseñas no coinciden");
       return;
     }
 
+    // Encriptar la contraseña
+    const hashedPassword = await bcrypt.hash(password, 10);
+
     try {
       const response = await fetch("http://localhost:8080/api/users/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, name, surname, username, password }),
+        body: JSON.stringify({ email, name, surname, username, hashedPassword }),
       });
       const data = await response.json();
 

@@ -62,20 +62,14 @@ export const signIn = async (req: Request, res: Response): Promise<void> => {
  */
 export const signUp = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { email, name, surname, username, password, confirmPassword } = req.body;
-    // Validar que la contraseña y la confirmación coincidan
-    if (password !== confirmPassword) {
-      res.status(400).json({ message: 'Las contraseñas no coinciden' });
-      return;
-    }
+    const { email, name, surname, username, hashedPassword } = req.body;
     // Verificar si el usuario ya existe
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       res.status(400).json({ message: 'El email ya está registrado' });
       return;
     }
-    // Encriptar la contraseña
-    const hashedPassword = await bcrypt.hash(password, 10);
+    
     // Crear el nuevo usuario
     const newUser = new User({
       email,
@@ -92,6 +86,7 @@ export const signUp = async (req: Request, res: Response): Promise<void> => {
     res.status(201).json({ message: 'Usuario registrado exitosamente', token });
   } catch (err) {
     res.status(500).json({ message: 'Error al registrar el usuario', error: err });
+    console.log(err)
   }
 };
 
