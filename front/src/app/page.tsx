@@ -5,8 +5,6 @@ import RightArrow from "../../public/icons/RightArrow";
 import DownArrow from "../../public/icons/DownArrow";
 import ProductCarrousell from "@/components/products/ProductCarrousell";
 import data from "../../public/products.json";
-import { Product } from "../../utils/product";
-import { Stint_Ultra_Condensed } from "next/font/google";
 
 export default function page() {
   const productitems = JSON.parse(JSON.stringify(data.productos));
