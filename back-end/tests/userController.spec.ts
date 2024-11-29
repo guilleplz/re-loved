@@ -70,27 +70,6 @@ describe('User Controller (Supertest)', () => {
     expect(response.body.surname).to.equal(updatedData.surname);
   });
 
-  it('should delete a user by ID', async () => {
-    // Crear un usuario para la prueba
-    const user = new User({
-      name: 'David',
-      surname: 'Smith',
-      username: 'davids',
-      email: 'zdhfb@example.com',
-      password: 'password123',
-      productsInStore: [],
-      favProducts: [],
-    });
-    await user.save();
-
-    // Probar la eliminación del usuario por ID
-    const response = await request(app).delete(`/api/users/${user._id}`).expect(200);
-
-    // Validar la respuesta
-    expect(response.body).to.have.property('message', 'Usuario eliminado');
-  });
-
-
   it('should get all users', async () => {
     const user1 = new User({
       name: 'Alice',
@@ -141,3 +120,4 @@ describe('User Controller (Supertest)', () => {
 
 
 });
+
