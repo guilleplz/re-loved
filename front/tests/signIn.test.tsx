@@ -82,7 +82,6 @@ describe('SignIn Component', () => {
     // Configurar el mock de fetch para simular un error de conexión
     (global.fetch as jest.Mock).mockRejectedValueOnce(new Error('Network Error'));
 
-    render(<SignIn />);
 
     // Completar el formulario
     fireEvent.change(screen.getByPlaceholderText(/Correo electrónico/i), { target: { value: 'test@example.com' } });

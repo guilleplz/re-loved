@@ -10,7 +10,7 @@ type LoginForm = {
   remember: boolean;
 };
 
-const signIn = () => {
+const SignIn = () => {
   const [formData, setFormData] = useState<LoginForm>({
     email: "",
     password: "",
@@ -82,4 +82,4 @@ const signIn = () => {
   );
 };
 
-export default signIn;
+export default SignIn;
