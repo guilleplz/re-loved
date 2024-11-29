@@ -4,6 +4,7 @@ import request from 'supertest';
 import mongoose from 'mongoose';
 import User from '../src/models/userModel.js';
 import app from '../src/server.js'; 
+import bcrypt from 'bcryptjs';
 
 describe('User Controller (Supertest)', () => {
   before(async () => {
@@ -119,5 +120,17 @@ describe('User Controller (Supertest)', () => {
   });
 
 
+ 
+  // prueba que existe una api para signup
+  it('should have a signup method', async () => {
+    const response = await request(app).options('/api/auth/signup');
+    expect(response.status).to.equal(204); // Verifica que la ruta existe
+  });
+  
+  it('should have a signin method', async () => {
+    const response = await request(app).options('/api/auth/signin');
+    expect(response.status).to.equal(204); // Verifica que la ruta existe
+  });
+  
 });
 
