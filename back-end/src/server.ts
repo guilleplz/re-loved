@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import connectDB from './config/db.js';
 import userRoutes from './routes/userRoutes.js'; // Rutas de usuario
 import productRoutes from './routes/productRoutes.js'; // Rutas de producto
+import cors from 'cors';
 
 // Cargar variables de entorno
 dotenv.config();
@@ -15,6 +16,7 @@ const startServer = async () => {
     // Conectar a la base de datos
     await connectDB();
 
+    app.use(cors())
     // Middlewares
     app.use(express.json()); // Parseo de JSON para solicitudes POST y PUT
 
