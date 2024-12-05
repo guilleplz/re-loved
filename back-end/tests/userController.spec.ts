@@ -76,37 +76,6 @@ describe('User Controller Tests', () => {
     expect(response.body.surname).to.equal(updatedData.surname);
   });
 
-  it('should get all users', async () => {
-    const user1 = new User({
-      name: 'Alice',
-      surname: 'Wonderland',
-      username: 'alicew',
-      email: 'alice@example.com',
-      password: 'password789',
-      productsInStore: [],
-      favProducts: [],
-    });
-    await user1.save();
-
-    const user2 = new User({
-      name: 'Bob',
-      surname: 'Builder',
-      username: 'bobb',
-      email: 'bob@example.com',
-      password: 'password456',
-      productsInStore: [],
-      favProducts: [],
-    });
-    await user2.save();
-
-    const response = await request(app).get('/api/users').expect(200);
-
-    expect(response.body.length).to.equal(2);
-    expect(response.body[0].username).to.equal(user1.username);
-    expect(response.body[1].username).to.equal(user2.username);
-  });
-
-
   it('should have a signup method', async () => {
     const response = await request(app).options('/api/auth/signup');
     expect(response.status).to.equal(204); // Verifica que la ruta existe

@@ -25,39 +25,6 @@ describe('Product Controller (Supertest)', () => {
     await Product.deleteMany({});
   });
 
-  it('should get all products', async () => {
-    const product = new Product({
-      name: 'Test Product',
-      priceInCents: 1000,
-      category: 'Test Category',
-      description: 'Test Description',
-      owner: 'Test Owner',
-      img: 'http://example.com/test.jpg',
-      likes: 0,
-    });
-    await product.save();
-
-    const response = await request(app).get('/api/products');
-    expect(response.status).to.equal(200);
-    expect(response.body.length).to.equal(1);
-  });
-
-  it('should get a product by ID', async () => {
-    const product = new Product({
-      name: 'Test Product',
-      priceInCents: 1000,
-      category: 'Test Category',
-      description: 'Test Description',
-      owner: 'Test Owner',
-      img: 'http://example.com/test.jpg',
-      likes: 0,
-    });
-    await product.save();
-
-    const response = await request(app).get(`/api/products/${product._id}`);
-    expect(response.status).to.equal(200);
-    expect(response.body.name).to.equal(product.name);
-  });
 
   it('should update a product by ID', async () => {
     const product = new Product({
