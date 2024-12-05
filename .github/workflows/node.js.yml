@@ -45,6 +45,10 @@ jobs:
     - name: Install dependencies (Backend)
       working-directory: ./back-end
       run: npm install
+    - name: Set environment variables for backend
+      run: |
+        echo "JWT_SECRET=mysecret" >> $GITHUB_ENV
+        echo "JWT_EXPIRATION=3600" >> $GITHUB_ENV
     - name: Run tests (Backend)
       working-directory: ./back-end
       run: npm test
