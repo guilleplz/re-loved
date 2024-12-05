@@ -49,6 +49,7 @@ jobs:
       run: |
         echo "JWT_SECRET=mysecret" >> $GITHUB_ENV
         echo "JWT_EXPIRATION=3600" >> $GITHUB_ENV
+        echo "MONOGO_URI=mongodb+srv://sytwReloved:sytw@re-loved.xmz9j.mongodb.net/sytwReloved?retryWrites=true&w=majority&appName=re-loved" >> $GITHUB_ENV
     - name: Run tests (Backend)
       working-directory: ./back-end
       run: npm test
