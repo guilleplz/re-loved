@@ -42,7 +42,7 @@ a {
 
 main {
   min-height: 100%;
-  margin-top: 7vh;
+  margin-top: 65px;
   display: flex;
   flex-direction: column;
 }
