@@ -13,6 +13,7 @@ describe('User Controller (Supertest)', () => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     } as mongoose.ConnectOptions);
+    await User.deleteMany({});
   });
 
   after(async () => {

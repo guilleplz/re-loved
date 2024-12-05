@@ -5,7 +5,7 @@
   "main": "server.ts",
   "scripts": {
     "dev": "tsc; node dist/server.js",
-    "test": "mocha --require ts-node/register tests/**/*spec.ts"
+    "test": "mocha --require ts-node/register tests/**/*spec.ts --exit"
   },
   "keywords": [],
   "author": "",
