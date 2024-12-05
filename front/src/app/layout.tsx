@@ -21,11 +21,16 @@ export const metadata: Metadata = {
     "re-loved es una página donde puedes vender los objetos que ya no te sirvan",
 };
 
+
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  
+
   return (
     <html lang="es">
       <body className={`${ubuntu.className}`}>

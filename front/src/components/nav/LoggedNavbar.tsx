@@ -3,13 +3,13 @@
 import React, { ButtonHTMLAttributes } from "react";
 import styles from "./navbar.module.css";
 import Button from "./Button";
-import LogoWithLetters from "../../../../public/icons/LogoWithLetters";
-import SearchIcon from "../../../../public/icons/SearchIcon";
-import HamburguerIcon from "../../../../public/icons/HamburguerIcon";
-import HeartIcon from "../../../../public/icons/HeartIcon";
+import LogoWithLetters from "../../../public/icons/LogoWithLetters";
+import SearchIcon from "../../../public/icons/SearchIcon";
+import HamburguerIcon from "../../../public/icons/HamburguerIcon";
+import HeartIcon from "../../../public/icons/HeartIcon";
 import Link from "next/link";
 
-const NavBar = () => {
+const LoggedNavBar = () => {
   const handleMenu = (e: React.MouseEvent<HTMLButtonElement>) => {
     const element = e.currentTarget.nextElementSibling as HTMLElement;
     if (element) {
@@ -56,4 +56,4 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
+export default LoggedNavBar;

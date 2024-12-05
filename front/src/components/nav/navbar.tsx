@@ -1,20 +1,39 @@
 "use client";
 
-import React, { ButtonHTMLAttributes } from "react";
+import React, { ButtonHTMLAttributes, useEffect, useState } from "react";
 import styles from "./navbar.module.css";
 import Button from "./Button";
 import LogoWithLetters from "../../../public/icons/LogoWithLetters";
 import SearchIcon from "../../../public/icons/SearchIcon";
 import HamburguerIcon from "../../../public/icons/HamburguerIcon";
 import Link from "next/link";
+import { verifyToken } from "../../../utils/services";
+import HeartIcon from "../../../public/icons/HeartIcon";
 
 const NavBar = () => {
   const handleMenu = (e: React.MouseEvent<HTMLButtonElement>) => {
     const element = e.currentTarget.nextElementSibling as HTMLElement;
     if (element) {
-      element.classList.toggle(styles.dropdown_hidden)
+      element.classList.toggle(styles.dropdown_hidden);
     }
   };
+
+  // estado para saber si el usuario está loggeado o no y cambiar el navbar
+  const [isLogged, setIsLogged] = useState(false);
+
+  // solo se ejecuta cuando se renderiza por primera vez
+  useEffect(() => {
+    const checkLogged = async () => {
+      const token = localStorage.getItem("token");
+
+      if (!token) return;
+
+      const result = await verifyToken(token);
+      setIsLogged(result);
+    };
+
+    checkLogged();
+  }, []);
 
   return (
     <nav className={styles.nav}>
@@ -24,11 +43,11 @@ const NavBar = () => {
             <HamburguerIcon color="#ffff" />
           </div>
         </button>
-          <div className={`${styles.dropdown} ${styles.dropdown_hidden}`}>
-            <ul>
-              <li>Categoria</li>
-            </ul>
-          </div>
+        <div className={`${styles.dropdown} ${styles.dropdown_hidden}`}>
+          <ul>
+            <li>Categoria</li>
+          </ul>
+        </div>
         <Link href="/">
           <LogoWithLetters color="#ffff" />
         </Link>
@@ -42,12 +61,26 @@ const NavBar = () => {
           </button>
         </form>
         <div className={styles.log_buttons}>
-          <Button type="normal" href="/sign-in">
-            Iniciar Sesión
-          </Button>
-          <Button type="yellow" href="/sign-up">
-            Registrarse
-          </Button>
+          {isLogged ? (
+            <>
+              <Button type="normal" href="/dashboard">
+                <HeartIcon />
+              </Button>
+              <Button type="yellow" href="/dashboard">
+                Vender
+              </Button>
+              {/* Icono de usuario */}
+            </>
+          ) : (
+            <>
+              <Button type="normal" href="/sign-in">
+                Iniciar Sesión
+              </Button>
+              <Button type="yellow" href="/sign-up">
+                Registrarse
+              </Button>
+            </>
+          )}
         </div>
       </div>
     </nav>
