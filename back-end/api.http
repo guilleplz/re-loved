@@ -25,3 +25,7 @@ content-type: application/json
     "productsInStore": [],
     "favProducts": []
 }
+
+###
+
+GET http://localhost:8080/api/products/

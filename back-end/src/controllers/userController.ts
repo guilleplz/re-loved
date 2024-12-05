@@ -7,7 +7,11 @@ import User from '../models/userModel.js';
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
+
+// Configura dotenv para usar el archivo en la raíz
 dotenv.config();
+
+
 
 const JWT_SECRET = process.env.JWT_SECRET;
 const JWT_EXPIRATION = process.env.JWT_EXPIRATION;

@@ -1,13 +1,35 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./page.module.css";
 import RightArrow from "../../public/icons/RightArrow";
 import DownArrow from "../../public/icons/DownArrow";
+import { useRouter } from "next/navigation";
 import ProductCarrousell from "@/components/products/ProductCarrousell";
 import data from "../../public/products.json";
+import { useEffect } from "react";
+import { verifyToken } from "../../utils/services";
 
 export default function page() {
+  const router = useRouter();
+
   const productitems = JSON.parse(JSON.stringify(data.productos));
+
+  useEffect(() => {
+    const isLogged = async () => {
+      console.log("logueando");
+      const token = localStorage.getItem("token");
+
+      if (!token) return;
+
+      const result = await verifyToken(token);
+
+      if (result) router.push("/dashboard");
+    };
+
+    isLogged();
+  }, []);
 
   return (
     <>
