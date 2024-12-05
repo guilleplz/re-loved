@@ -18,7 +18,7 @@ export default function Dashboard() {
           className={styles.hero_image}
         />
         <div className={styles.hero}>
-          <img src="images/camisa_verde.png" alt="" />
+          <img src="users/default.webp" alt="Imagen del usuario" />
           <div className={styles.hero_text}>
             <h1>Re-Loved</h1>
             <h2>¡Bienvenido User!</h2>

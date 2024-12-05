@@ -33,30 +33,6 @@
   }
 }
 
-.dropdown_hidden {
-  display: none;
-  position: absolute;
-  background-color: #ffff;
-  min-width: 400px;
-  min-height: 500px;
-  top: 7vh;
-  left: 0;
-  color: black;
-
-  & ul li {
-    list-style: none;
-    height: 3vh;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    padding-left: 2vh;
-
-    &:hover {
-      background-color: #bebcbc;
-    }
-  }
-}
-
 .dropdown {
   position: absolute;
   background-color: #ffff;
@@ -65,21 +41,23 @@
   top: 7vh;
   left: 0;
   color: black;
+  overflow: hidden;
+  border-radius: 10px;
 
   & ul li {
     list-style: none;
     height: 3vh;
     display: flex;
     align-items: center;
+    justify-content: left;
     cursor: pointer;
-    padding-left: 2vh;
+    padding: 20px;
 
     &:hover {
       background-color: #bebcbc;
     }
   }
 }
-
 
 .hamburguer {
   pointer-events: none;
@@ -122,4 +100,61 @@
   display: flex;
   flex-direction: row;
   gap: 2vh;
+}
+
+.user_button {
+  height: 40px;
+  width: 40px;
+  padding: 0;
+  margin: 0;
+  border-radius: 100%;
+  border: none;
+  cursor: pointer;
+}
+
+.user_image {
+  height: 40px;
+  margin: 0;
+}
+
+.user_menu {
+  background-color: #ffff;
+  position: absolute;
+  top: 70px;
+  right: 0;
+  border-radius: 10px;
+  overflow: hidden;
+
+  & ul li {
+    list-style: none;
+    height: 3vh;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    cursor: pointer;
+    padding: 20px;
+    font-size: 17px;
+
+    &:hover {
+      background-color: #bebcbc;
+    }
+  }
+}
+
+.menu_hidden {
+  display: none;
+}
+
+.close_session_button {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  color: red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  cursor: pointer;
 }

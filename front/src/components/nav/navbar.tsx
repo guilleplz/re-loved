@@ -9,14 +9,32 @@ import HamburguerIcon from "../../../public/icons/HamburguerIcon";
 import Link from "next/link";
 import { verifyToken } from "../../../utils/services";
 import HeartIcon from "../../../public/icons/HeartIcon";
+import { useRouter, usePathname  } from "next/navigation";
 
 const NavBar = () => {
+
+  const router = useRouter();
+  const pathname = usePathname();
+
   const handleMenu = (e: React.MouseEvent<HTMLButtonElement>) => {
     const element = e.currentTarget.nextElementSibling as HTMLElement;
     if (element) {
-      element.classList.toggle(styles.dropdown_hidden);
+      element.classList.toggle(styles.menu_hidden);
     }
   };
+
+  const handleUserMenu = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const element = e.currentTarget.nextElementSibling as HTMLElement;
+    if (element) {
+      element.classList.toggle(styles.menu_hidden);
+    }
+  }
+
+  const handleLogOut = () => {
+    localStorage.removeItem("token")
+    setIsLogged(false);
+    router.push("/")
+  }
 
   // estado para saber si el usuario está loggeado o no y cambiar el navbar
   const [isLogged, setIsLogged] = useState(false);
@@ -33,7 +51,7 @@ const NavBar = () => {
     };
 
     checkLogged();
-  }, []);
+  }, [pathname]);
 
   return (
     <nav className={styles.nav}>
@@ -43,7 +61,7 @@ const NavBar = () => {
             <HamburguerIcon color="#ffff" />
           </div>
         </button>
-        <div className={`${styles.dropdown} ${styles.dropdown_hidden}`}>
+        <div className={`${styles.dropdown} ${styles.menu_hidden}`}>
           <ul>
             <li>Categoria</li>
           </ul>
@@ -69,7 +87,19 @@ const NavBar = () => {
               <Button type="yellow" href="/dashboard">
                 Vender
               </Button>
-              {/* Icono de usuario */}
+              <button onClick={handleUserMenu} className={styles.user_button}>
+                <img
+                  src="users/default.webp"
+                  alt="imagen del usuario"
+                  className={styles.user_image}
+                />
+              </button>
+              <section className={`${styles.user_menu} ${styles.menu_hidden}`}>
+                <ul>
+                  <li>Mi tienda</li>
+                  <li><button className={styles.close_session_button} onClick={handleLogOut}>Cerrar sesión</button></li>
+                </ul>
+              </section>
             </>
           ) : (
             <>
