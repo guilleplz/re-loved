@@ -15,10 +15,10 @@ jobs:
     - name: Cloning repo
       uses: actions/checkout@v4
 
-    - name: Use Node.js 16.x
+    - name: Use Node.js 21.x
       uses: actions/setup-node@v4
       with:
-        node-version: 16.x
+        node-version: 21.x
 
     - name: Installing backend dependencies
       run: |
