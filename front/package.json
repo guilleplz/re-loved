@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "test": "jest",
-    "coverage": "jest --coverage"
+    "coverage": "jest --coverage report --reporter=lcov"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
