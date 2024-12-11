@@ -38,4 +38,11 @@ const config: Config = {
   preset: 'ts-jest',
 };
 
+module.exports = {
+  collectCoverage: true,
+  coverageReporters: ['lcov', 'text'],
+  coverageDirectory: 'coverage',
+  // Otras configuraciones de Jest
+};
+
 export default config;
