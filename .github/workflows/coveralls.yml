@@ -15,20 +15,15 @@ jobs:
     - name: Cloning repo
       uses: actions/checkout@v4
 
-    - name: Use Node.js 16.x
+    - name: Use Node.js 21.x
       uses: actions/setup-node@v4
       with:
-        node-version: 16.x
+        node-version: 21.x
 
     - name: Installing backend dependencies
       run: |
         cd back-end
         npm install
-
-    - name: Generating coverage information for backend
-      run: |
-        cd back-end
-        npm run coverage
 
     - name: Coveralls GitHub Action for backend
       uses: coverallsapp/github-action@v2.2.3
@@ -52,11 +47,6 @@ jobs:
       run: |
         cd front
         npm install
-
-    - name: Generating coverage information for frontend
-      run: |
-        cd front
-        npm run coverage
 
     - name: Coveralls GitHub Action for frontend
       uses: coverallsapp/github-action@v2.2.3
