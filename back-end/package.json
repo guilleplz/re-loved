@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "tsc; node dist/server.js",
     "test": "mocha --require ts-node/register tests/**/*spec.ts --exit",
-    "coverage": "nyc mocha --timeout 10000 --exit report --reporter=lcov"
+    "coverage": "nyc mocha --timeout 10000 --exit"
   },
   "keywords": [],
   "author": "",
