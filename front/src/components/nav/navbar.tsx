@@ -7,14 +7,18 @@ import LogoWithLetters from "../../../public/icons/LogoWithLetters";
 import SearchIcon from "../../../public/icons/SearchIcon";
 import HamburguerIcon from "../../../public/icons/HamburguerIcon";
 import Link from "next/link";
-import { verifyToken } from "../../../utils/services";
+import { getAllCategories, verifyToken } from "../../../utils/services";
 import HeartIcon from "../../../public/icons/HeartIcon";
 import { useRouter, usePathname  } from "next/navigation";
+import { categorie } from "../../../utils/categorie";
 
 const NavBar = () => {
 
   const router = useRouter();
   const pathname = usePathname();
+
+  const categories = getAllCategories();
+
 
   const handleMenu = (e: React.MouseEvent<HTMLButtonElement>) => {
     const element = e.currentTarget.nextElementSibling as HTMLElement;
@@ -63,7 +67,9 @@ const NavBar = () => {
         </button>
         <div className={`${styles.dropdown} ${styles.menu_hidden}`}>
           <ul>
-            <li>Categoria</li>
+            {
+              
+            }
           </ul>
         </div>
         <Link href="/">

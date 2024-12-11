@@ -4,6 +4,7 @@ import connectDB from './config/db.js';
 import userRoutes from './routes/userRoutes.js'; // Rutas de usuario
 import productRoutes from './routes/productRoutes.js'; // Rutas de producto
 import tokenRoutes from './routes/tokenRouter.js'
+import categorieRoutes from './routes/categoriesRoutes.js'
 import cors from 'cors';
 
 dotenv.config()
@@ -24,6 +25,7 @@ const startServer = async () => {
     // Rutas
     app.use('/api/users', userRoutes);  // Rutas para usuarios
     app.use('/api/products', productRoutes); // Rutas para productos
+    app.use('/api/categories', categorieRoutes); // Rutas para las categorías
     app.use('/api/token', tokenRoutes) //Rutas para verificar tokens
 
     // Ruta de prueba ara asegurarse de que la app está corriendo
