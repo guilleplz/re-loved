@@ -5,8 +5,7 @@
   "main": "server.ts",
   "scripts": {
     "dev": "tsc; node dist/server.js",
-    "test": "mocha --require ts-node/register tests/**/*spec.ts --exit",
-    "coverage": "nyc mocha --timeout 10000 --exit"
+    "test": "mocha --require ts-node/register tests/**/*spec.ts --exit"
   },
   "keywords": [],
   "author": "",
