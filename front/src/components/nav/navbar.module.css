@@ -10,6 +10,11 @@
   z-index: 10000;
 }
 
+.dropdown_h2 {
+  font-family: quickSand;
+  padding: 20px;
+}
+
 .logo {
   display: flex;
   flex-direction: row;
@@ -37,21 +42,28 @@
   position: absolute;
   background-color: #ffff;
   min-width: 400px;
-  min-height: 500px;
+  min-height: 100%;
   top: 7vh;
   left: 0;
   color: black;
   overflow: hidden;
   border-radius: 10px;
+  padding-bottom: 20px;
 
   & ul li {
     list-style: none;
+    
+  }
+
+  & ul li a {
+    padding: 20px;
     height: 3vh;
     display: flex;
     align-items: center;
     justify-content: left;
     cursor: pointer;
-    padding: 20px;
+    color: black;
+    gap: 10px;
 
     &:hover {
       background-color: #bebcbc;

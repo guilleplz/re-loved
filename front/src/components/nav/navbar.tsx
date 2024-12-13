@@ -9,16 +9,15 @@ import HamburguerIcon from "../../../public/icons/HamburguerIcon";
 import Link from "next/link";
 import { getAllCategories, verifyToken } from "../../../utils/services";
 import HeartIcon from "../../../public/icons/HeartIcon";
-import { useRouter, usePathname  } from "next/navigation";
-import { categorie } from "../../../utils/categorie";
+import { useRouter, usePathname } from "next/navigation";
+import { Categorie } from "../../../utils/categorie";
+import ConfigIcon from "../../../public/icons/ConfigIcon";
+
+const categories: Categorie[] = await getAllCategories();
 
 const NavBar = () => {
-
   const router = useRouter();
   const pathname = usePathname();
-
-  const categories = getAllCategories();
-
 
   const handleMenu = (e: React.MouseEvent<HTMLButtonElement>) => {
     const element = e.currentTarget.nextElementSibling as HTMLElement;
@@ -32,13 +31,13 @@ const NavBar = () => {
     if (element) {
       element.classList.toggle(styles.menu_hidden);
     }
-  }
+  };
 
   const handleLogOut = () => {
-    localStorage.removeItem("token")
+    localStorage.removeItem("token");
     setIsLogged(false);
-    router.push("/")
-  }
+    router.push("/");
+  };
 
   // estado para saber si el usuario está loggeado o no y cambiar el navbar
   const [isLogged, setIsLogged] = useState(false);
@@ -66,10 +65,16 @@ const NavBar = () => {
           </div>
         </button>
         <div className={`${styles.dropdown} ${styles.menu_hidden}`}>
+          <h2 className={styles.dropdown_h2}>Categorías</h2>
           <ul>
-            {
-              
-            }
+            {categories.map((categorie, index) => (
+              <li key={`${categorie.category_name}-${index}`}>
+                <Link href={`/categories/${categorie._id}`}>
+                  <ConfigIcon />
+                  {categorie.category_name}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
         <Link href="/">
@@ -103,7 +108,14 @@ const NavBar = () => {
               <section className={`${styles.user_menu} ${styles.menu_hidden}`}>
                 <ul>
                   <li>Mi tienda</li>
-                  <li><button className={styles.close_session_button} onClick={handleLogOut}>Cerrar sesión</button></li>
+                  <li>
+                    <button
+                      className={styles.close_session_button}
+                      onClick={handleLogOut}
+                    >
+                      Cerrar sesión
+                    </button>
+                  </li>
                 </ul>
               </section>
             </>
