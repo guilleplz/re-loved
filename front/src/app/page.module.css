@@ -54,6 +54,30 @@
   }
 }
 
+@media (max-width: 1100px) {
+  .hero {
+    top: 20%;
+  }
+}
+
+@media (max-width: 750px) {
+
+  .hero h1 {
+    font-size: 4vh;
+  }
+
+  .hero h2 {
+    font-size: 3vh;
+  }
+
+  .button {
+    height: 4vh;
+    width: 15vh;
+    font-size: 1vh;
+  }
+  
+}
+
 .down_arrow {
   margin-top: 7vh;
   align-self: center;

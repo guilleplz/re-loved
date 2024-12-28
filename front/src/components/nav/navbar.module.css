@@ -27,6 +27,12 @@
   }
 }
 
+@media (max-width: 520px) {
+  .logo {
+    display: none;
+  }
+}
+
 .hamburguer_menu {
   background-color: transparent;
   border: none;
@@ -77,11 +83,14 @@
 
 .form {
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .input_text {
-  height: 4vh;
-  width: 50vh;
+  height: 30px;
+  width: 30vw;
   background-color: #ffff;
   border: none;
   border-radius: 30px;
@@ -91,16 +100,27 @@
   padding-right: 50px;
 }
 
+
 .input_button {
   position: absolute;
   right: 5vh;
-  bottom: 3px;
+  bottom: 2px;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: transparent;
   border: none;
   cursor: pointer;
+}
+
+@media (max-width: 800px) {
+  .input_text {
+    display: none;
+  }
+
+  .input_button {
+    display: none;
+  }
 }
 
 .form_side {

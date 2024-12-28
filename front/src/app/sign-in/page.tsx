@@ -3,6 +3,8 @@
 import React, { useState } from "react";
 import styles from "./page.module.css";
 import { useRouter } from "next/navigation"; 
+import { getUserByEmail } from "../../../utils/services";
+import { useUserStore } from "@/store/user";
 
 type LoginForm = {
   email: string;
@@ -11,6 +13,9 @@ type LoginForm = {
 };
 
 const SignIn = () => {
+  const setUser = useUserStore(state => state.setUser);
+
+
   const [formData, setFormData] = useState<LoginForm>({
     email: "",
     password: "",
@@ -42,6 +47,13 @@ const SignIn = () => {
 
       const data = await response.json();
       if (response.ok) {
+        
+        const user = await getUserByEmail(email.value);
+
+        console.log(user)
+
+        setUser(user)
+
         // Guardar el token en localStorage o manejar sesión
         localStorage.setItem("token", data.token);
         router.push("/dashboard")

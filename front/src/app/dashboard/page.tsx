@@ -1,13 +1,42 @@
-import Image from "next/image";
+"use client";
 import Link from "next/link";
 import styles from "./page.module.css";
 import RightArrow from "../../../public/icons/RightArrow";
 import DownArrow from "../../../public/icons/DownArrow";
 import ProductCarrousell from "@/components/products/ProductCarrousell";
 import data from "../../../public/products.json";
+import { useUserStore } from "@/store/user";
+import { useEffect } from "react";
+import { verifyToken } from "../../../utils/services";
+import { useRouter } from "next/navigation";
 
 export default function Dashboard() {
+  const router = useRouter();
+
   const productitems = JSON.parse(JSON.stringify(data.productos));
+
+  const userName = useUserStore((state) => state.username);
+  const removeUser = useUserStore((state) => state.removeUser);
+
+  useEffect(() => {
+    const checkLogged = async () => {
+      const token = localStorage.getItem("token");
+
+      if (!token) {
+        removeUser();
+        router.push("/");
+        return;
+      }
+
+      const result = await verifyToken(token);
+      if (!result) {
+        removeUser();
+        router.push("/");
+      }
+    };
+
+    checkLogged();
+  }, []);
 
   return (
     <>
@@ -21,8 +50,8 @@ export default function Dashboard() {
           <img src="users/default.webp" alt="Imagen del usuario" />
           <div className={styles.hero_text}>
             <h1>Re-Loved</h1>
-            <h2>¡Bienvenido User!</h2>
-            <Link className={styles.button} href={"/"}>
+            <h2>¡Bienvenido {userName}!</h2>
+            <Link className={styles.button} href={"/dashboard/upload"}>
               ¡Vende ahora! <RightArrow color="#1e2b44" />{" "}
             </Link>
           </div>

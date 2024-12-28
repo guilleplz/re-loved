@@ -10,12 +10,14 @@ import Link from "next/link";
 import { getAllCategories, verifyToken } from "../../../utils/services";
 import HeartIcon from "../../../public/icons/HeartIcon";
 import { useRouter, usePathname } from "next/navigation";
-import { Categorie } from "../../../utils/categorie";
+import { Categorie } from "../../../utils/types";
 import ConfigIcon from "../../../public/icons/ConfigIcon";
+import { useUserStore } from "@/store/user";
 
 const categories: Categorie[] = await getAllCategories();
 
 const NavBar = () => {
+  const removeUser = useUserStore(state => state.removeUser)
   const router = useRouter();
   const pathname = usePathname();
 
@@ -36,6 +38,7 @@ const NavBar = () => {
   const handleLogOut = () => {
     localStorage.removeItem("token");
     setIsLogged(false);
+    removeUser();
     router.push("/");
   };
 
