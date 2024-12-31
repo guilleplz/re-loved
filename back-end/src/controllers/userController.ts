@@ -90,7 +90,6 @@ export const signUp = async (req: Request, res: Response): Promise<void> => {
     res.status(201).json({ message: 'Usuario registrado exitosamente', token });
   } catch (err) {
     res.status(500).json({ message: 'Error al registrar el usuario', error: err });
-    console.log(err)
   }
 };
 
@@ -156,9 +155,8 @@ export const getUsers = async (req: Request, res: Response): Promise<void> => {
 export const getUserByEmail = async (req:Request, res: Response): Promise<void> => {
   try {
     const {email} = req.params
-    console.log(email)
 
-
+  
     const user = await User.findOne({email});
     if (!user) {
       res.status(404).json({ message: 'Usuario no encontrado' });

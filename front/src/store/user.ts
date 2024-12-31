@@ -1,5 +1,8 @@
 import { create } from "zustand";
 import { User } from "../../utils/types";
+import mongoose, { set } from "mongoose";
+import { getIdFromToken, getUserById, verifyToken } from "../../utils/services";
+import { useRouter } from "next/navigation";
 
 interface UserStore extends User {
   setUser: (user: User) => void;
@@ -7,6 +10,7 @@ interface UserStore extends User {
 }
 
 export const useUserStore = create<UserStore>((set) => ({
+  _id: new mongoose.Types.ObjectId(),
   name: "",
   surname: "",
   username: "",
@@ -17,6 +21,7 @@ export const useUserStore = create<UserStore>((set) => ({
 
   setUser: (user: User) => {
     set({
+      _id: user._id,
       name: user.name,
       surname: user.surname,
       username: user.username,
@@ -29,6 +34,7 @@ export const useUserStore = create<UserStore>((set) => ({
 
   removeUser: () => {
     set({
+      _id: new mongoose.Types.ObjectId(),
       name: "",
       surname: "",
       username: "",
@@ -39,3 +45,29 @@ export const useUserStore = create<UserStore>((set) => ({
     });
   },
 }));
+
+export const checkLogged = async (): Promise<User | undefined> => {
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    return;
+  }
+
+  const result = await verifyToken(token);
+  if (!result) {
+    return;
+  }
+
+  const userId = await getIdFromToken(token);
+  if (!userId) {
+    return;
+  }
+
+  const user = await getUserById(userId.toString())
+  if (!user) {
+    return;
+  }
+
+  return user;
+
+};

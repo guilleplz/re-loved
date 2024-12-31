@@ -1,3 +1,4 @@
+import { ObjectId, Types } from "mongoose";
 import { Categorie, Product, User } from "./types";
 
 export const getAllProducts = async () => {
@@ -29,15 +30,15 @@ export const getUserById = async (id: string) => {
 
   const user: User = await res.json();
   return user;
-} 
+};
 
 export const getUserByEmail = async (email: string) => {
-  const res = await fetch(`http://localhost:8080/api/users/email/${email}`)
+  const res = await fetch(`http://localhost:8080/api/users/email/${email}`);
 
   const userdata = await res.json();
-  const user: User = userdata.user
+  const user: User = userdata.user;
   return user;
-}
+};
 
 export const verifyToken = async (token: string): Promise<boolean> => {
   const response = await fetch("http://localhost:8080/api/token", {
@@ -50,4 +51,45 @@ export const verifyToken = async (token: string): Promise<boolean> => {
 
   if (response.ok) return true;
   return false;
+};
+
+interface tokenData {
+  id: Types.ObjectId;
+}
+
+export const getIdFromToken = async (
+  token: string
+): Promise<Types.ObjectId> => {
+  const response = await fetch(`http://localhost:8080/api/token/${token}`, {
+    method: "GET",
+  });
+
+  const data: tokenData = await response.json();
+  return data.id;
+};
+
+export const createNewProduct = async (product: Product) => {
+  try {
+    const response = await fetch("http://localhost:8080/api/products", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: product.name,
+        priceInCents: product.priceInCents,
+        category: product.category,
+        description: product.description,
+        owner: product.owner,
+        img: product.img,
+      }),
+    });
+
+    // Comprueba si la respuesta tiene estado exitoso (2xx)
+    if (response.ok) {
+      return response;
+    }
+  } catch (err) {
+    return err;
+  }
 };

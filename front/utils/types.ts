@@ -1,19 +1,23 @@
 import mongoose from 'mongoose';
 
 export interface Categorie {
-  _id: mongoose.Types.ObjectId;
+  _id?: mongoose.Types.ObjectId;
   category_name: string;
   productsInCategory: number;
 }
 
 export interface Product {
-  nombre: string;
-  precio: number;
-  categoria: string;
-  imagen:string;
+  _id?: mongoose.Types.ObjectId,
+  name: string;
+  priceInCents: number;
+  category: string;
+  description: string;
+  owner: mongoose.Types.ObjectId;
+  img:string;
 }
 
 export interface User {
+  _id?: mongoose.Types.ObjectId,
   name: string,
   surname: string,
   username: string;

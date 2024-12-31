@@ -8,7 +8,8 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "ik.imagekit.io"
       }
-    ]
+    ],
+    domains: ["res.cloudinary.com"],
   }
 };
 

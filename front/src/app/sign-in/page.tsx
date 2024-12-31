@@ -50,8 +50,6 @@ const SignIn = () => {
         
         const user = await getUserByEmail(email.value);
 
-        console.log(user)
-
         setUser(user)
 
         // Guardar el token en localStorage o manejar sesión

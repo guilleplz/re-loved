@@ -4,6 +4,10 @@
 
 import { Request, Response } from 'express';
 import Product from '../models/productModel.js';
+import User from '../models/userModel.js';
+import Categorie from '../models/categorieModel.js';
+import mongoose, { Types } from 'mongoose';
+import { ObjectId } from 'mongodb';
 
 /**
  * Función para CREAR NUEVO PRODUCTO
@@ -39,6 +43,20 @@ export const createProduct = async (req: Request, res: Response): Promise<void> 
 
     // Guardar el nuevo producto en la base de datos
     await nuevoProducto.save();
+
+
+    if (!Types.ObjectId.isValid(owner)) {
+      throw new Error("Invalid ObjectId");
+  }
+  
+    const user = await User.findById(owner);
+
+    const updatedUser = await User.findByIdAndUpdate(
+      owner,
+      { $push: { productsInStore: nuevoProducto._id } },
+      { new: true } // Retornar el documento actualizado
+    );
+
     // Responder con el producto creado
     res.status(201).json(nuevoProducto);
   } catch (err) {

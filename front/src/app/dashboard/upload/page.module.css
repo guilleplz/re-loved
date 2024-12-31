@@ -1,0 +1,27 @@
+
+.title {
+  font-family: quicksand;
+}
+
+.body {
+  padding: 50px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+
+  & div {
+    display: flex;
+
+    & div {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
+
+.preview_image {
+  height: 100px;
+  width: 100px;
+}

@@ -10,14 +10,15 @@ import Link from "next/link";
 import { getAllCategories, verifyToken } from "../../../utils/services";
 import HeartIcon from "../../../public/icons/HeartIcon";
 import { useRouter, usePathname } from "next/navigation";
-import { Categorie } from "../../../utils/types";
+import { Categorie, User } from "../../../utils/types";
 import ConfigIcon from "../../../public/icons/ConfigIcon";
-import { useUserStore } from "@/store/user";
+import { checkLogged, useUserStore } from "@/store/user";
 
 const categories: Categorie[] = await getAllCategories();
 
 const NavBar = () => {
-  const removeUser = useUserStore(state => state.removeUser)
+  const removeUser = useUserStore((state) => state.removeUser);
+  const setUser = useUserStore((state) => state.setUser);
   const router = useRouter();
   const pathname = usePathname();
 
@@ -44,19 +45,23 @@ const NavBar = () => {
 
   // estado para saber si el usuario está loggeado o no y cambiar el navbar
   const [isLogged, setIsLogged] = useState(false);
-
   // solo se ejecuta cuando se renderiza por primera vez
   useEffect(() => {
-    const checkLogged = async () => {
-      const token = localStorage.getItem("token");
-
-      if (!token) return;
-
-      const result = await verifyToken(token);
-      setIsLogged(result);
+    const check = async () => {
+      const result = await checkLogged();
+      if (!result && pathname !== "/sign-in" && pathname !== "sign-up" && pathname !== "/") {
+        removeUser();
+        setIsLogged(false);
+        router.push("/");
+      } else {
+        if (result) {
+          setIsLogged(true)
+          setUser(result);
+        }
+      }
     };
 
-    checkLogged();
+    check();
   }, [pathname]);
 
   return (
@@ -98,7 +103,7 @@ const NavBar = () => {
               <Button type="normal" href="/dashboard">
                 <HeartIcon />
               </Button>
-              <Button type="yellow" href="/dashboard">
+              <Button type="yellow" href="/dashboard/upload">
                 Vender
               </Button>
               <button onClick={handleUserMenu} className={styles.user_button}>

@@ -1,4 +1,5 @@
-import mongoose, { Schema, Document } from 'mongoose';
+import mongoose, { Schema, Document, Types } from 'mongoose';
+import { types } from 'util';
 
 /**
  * Interfaz para los datos del producto
@@ -15,9 +16,9 @@ import mongoose, { Schema, Document } from 'mongoose';
  * - likes: número de "me gusta" (número)
  */
 interface Product extends Document {
-  _id: mongoose.Schema.Types.ObjectId;
+  _id: mongoose.Types.ObjectId;
   name: string;
-  owner: string;
+  owner: mongoose.Types.ObjectId;
   img: string;
   priceInCents: number;
   description: string;
@@ -51,7 +52,7 @@ const productSchema = new Schema<Product>({
     required: true,
   },
   owner: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
     required: true,
   },
   img: {
