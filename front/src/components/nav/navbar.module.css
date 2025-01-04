@@ -104,7 +104,7 @@
 .input_button {
   position: absolute;
   right: 5vh;
-  bottom: 2px;
+  bottom: 3px;
   display: flex;
   justify-content: center;
   align-items: center;

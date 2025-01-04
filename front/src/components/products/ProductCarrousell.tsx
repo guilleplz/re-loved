@@ -3,8 +3,9 @@
 import { useState } from "react";
 import styles from "./ProductCarrousell.module.css";
 import ProductCard from "./ProductCard";
-import { Product } from "../../../utils/product";
 import DownArrow from "../../../public/icons/DownArrow";
+import { Product } from "../../../utils/types";
+import { Types } from "mongoose";
 
 interface ProductCarrousellProps {
   title?: string;
@@ -43,7 +44,7 @@ const ProductCarrousell = ({ title, products }: ProductCarrousellProps) => {
           }}
         >
           {products.map((product) => (
-            <ProductCard key={product.nombre} product={product} />
+            <ProductCard key={product._id?.toString()} product={product} />
           ))}
         </div>
         <button

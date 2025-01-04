@@ -9,10 +9,21 @@ export const getAllProducts = async () => {
 };
 
 export const getLatestProducts = async () => {
-  const response = await fetch("localhost:8080/api/products", {
+  const response = await fetch("http://localhost:8080/api/products", {
     method: "GET",
   });
   const products: Product[] = await response.json();
+  return products.reverse()
+
+};
+
+export const getProductsByCategory = async (categorieName: string) => {
+  const response = await fetch("http://localhost:8080/api/products", {
+    method: "GET",
+  });
+  const products: Product[] = await response.json();
+  return products.filter((product: Product) => product.category === categorieName)
+
 };
 
 export const getAllCategories = async () => {

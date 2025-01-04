@@ -49,7 +49,11 @@ const NavBar = () => {
   useEffect(() => {
     const check = async () => {
       const result = await checkLogged();
-      if (!result && pathname !== "/sign-in" && pathname !== "sign-up" && pathname !== "/") {
+
+
+
+      if (!result && (pathname !== "/sign-in" && pathname !== "/sign-up" && pathname !== "/")) {
+        console.log(pathname)
         removeUser();
         setIsLogged(false);
         router.push("/");
@@ -108,7 +112,7 @@ const NavBar = () => {
               </Button>
               <button onClick={handleUserMenu} className={styles.user_button}>
                 <img
-                  src="users/default.webp"
+                  src="/users/default.webp"
                   alt="imagen del usuario"
                   className={styles.user_image}
                 />

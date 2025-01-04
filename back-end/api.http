@@ -33,3 +33,7 @@ GET http://localhost:8080/api/products/
 ###
 
 GET http://localhost:8080/api/categories/
+
+###
+
+DELETE http://localhost:8080/api/products/6775a6e076dc74ac498df25a

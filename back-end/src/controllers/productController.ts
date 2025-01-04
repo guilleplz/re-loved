@@ -49,8 +49,6 @@ export const createProduct = async (req: Request, res: Response): Promise<void> 
       throw new Error("Invalid ObjectId");
   }
   
-    const user = await User.findById(owner);
-
     const updatedUser = await User.findByIdAndUpdate(
       owner,
       { $push: { productsInStore: nuevoProducto._id } },
@@ -144,6 +142,21 @@ export const updateProduct = async (req: Request, res: Response): Promise<void> 
  */
 export const deleteProduct = async (req: Request, res: Response): Promise<void> => {
   try {
+
+    const productToDelete = await Product.findById(req.params.id);
+    
+    // Si el producto no existe, devolver un mensaje de error
+    if (!productToDelete) {
+      res.status(404).json({ message: 'Producto no encontrado' });
+      return;
+    }
+
+    await User.findByIdAndUpdate(
+      productToDelete.owner, // ID del propietario del producto
+      { $pull: { productsId: productToDelete._id } } // $pull elimina el ID del array
+    );
+
+    
     // Eliminar el producto por su ID
     const product = await Product.findByIdAndDelete(req.params.id);
     // Si el producto no existe, devolver un mensaje de error
@@ -151,6 +164,8 @@ export const deleteProduct = async (req: Request, res: Response): Promise<void> 
       res.status(404).json({ message: 'Producto no encontrado' });
       return;
     }
+
+
     // Responder con un mensaje de confirmación
     res.json({ message: 'Producto eliminado' });
   } catch (error) {

@@ -59,22 +59,22 @@ const Upload = () => {
     <div className={styles.body}>
       <h1 className={styles.title}>Añadir un artículo</h1>
       <form onSubmit={handleSubmit} className={styles.form}>
-        <div>
-          <div>
+        <div className={styles.separador_con_boton}>
+          <div className={styles.separador_columnas}>
             <h2 className={styles.title}>Información sobre el artículo</h2>
-            <div>
+            <div className={styles.separador_preguntas}>
               <label htmlFor="Nombre">Nombre del artículo: </label>
               <input type="text" id="Nombre" name="nombre" />
             </div>
-            <div>
+            <div className={styles.separador_preguntas}>
               <label htmlFor="Descripcion">Descripción: </label>
               <input type="text" id="Descripcion" name="descripcion" />
             </div>
-            <div>
+            <div className={styles.separador_preguntas}>
               <label htmlFor="Precio">Precio (centimos): </label>
               <input type="number" id="Precio" name="precio" />
             </div>
-            <div>
+            <div className={styles.separador_preguntas}>
               <label htmlFor="Categoria">Precio (€): </label>
               <select id="Categoria" name="categoria">
                 {categories.map((categorie) => (
@@ -88,17 +88,16 @@ const Upload = () => {
               </select>
             </div>
           </div>
-          <div>
-            <h2 className={styles.title}>Imagenes del artículo</h2>
+          <div className={styles.separador_foto}>
+            <h2 className={styles.title}>Imagen del artículo</h2>
             <CldUploadWidget
               uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_PRESET_NAME}
               onSuccess={handleUpload}
             >
               {({ open }) => {
-                return <button onClick={() => open()}>Upload an Image</button>;
+                return <button className={styles.submit_button} onClick={() => open()}>Upload an Image</button>;
               }}
             </CldUploadWidget>
-          </div>
           {url && (
             <img
               src={url}
@@ -106,9 +105,10 @@ const Upload = () => {
               className={styles.preview_image}
             />
           )}
+          </div>
         </div>
 
-        <button type="submit">submit</button>
+        <button type="submit" className={styles.submit_button}>submit</button>
         {error && <p className={styles.error}>{error}</p>}
       </form>
     </div>
