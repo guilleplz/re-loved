@@ -1,45 +1,78 @@
 "use client";
 
 import { useParams, useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { MouseEvent, useEffect, useState } from "react";
 import {
   getLatestProducts,
   getProductById,
   getProductsByCategory,
   getUserById,
+  setLike,
 } from "../../../../utils/services";
 import { Product, User } from "../../../../utils/types";
 import styles from "./page.module.css";
 import BackButton from "@/components/BackButton";
 import ProductCarrousell from "@/components/products/ProductCarrousell";
+import HeartIcon from "../../../../public/icons/HeartIcon";
+import Heart from "../../../../public/icons/Heart";
+import { checkLogged, useUserStore } from "@/store/user";
 
 const ProductDetail = () => {
   const [product, setProduct] = useState<Product>();
   const [otherProducts, setOtherProducts] = useState<Product[]>();
   const [useroftheProduct, setUserOfTheProduct] = useState<User>();
+  const [currentUser, setCurrentUser] = useState<User>();
+  const [isLiked, setIsLiked] = useState<boolean>()
+  const [reloadKey, setReloadKey] = useState(0);
+
+  const setUser = useUserStore((state) => state.setUser);
 
   useEffect(() => {
+    const check = async () => {
+      const result = await checkLogged();
+      if (result) {
+        setCurrentUser(result);
+      }
+    };
+
     const getProduct = async () => {
       try {
         const product = await getProductById(id as string);
         const products = await getProductsByCategory(product.category);
-        const user = await  getUserById(product.owner.toString());
+        const user = await getUserById(product.owner.toString());
         setProduct(product);
         setOtherProducts(products);
-        setUserOfTheProduct(user)
+        setUserOfTheProduct(user);
+        if (user.favProducts?.find(favProduct => favProduct._id === product._id)) {
+          setIsLiked(true)
+        } else {
+          setIsLiked(false)
+        }
       } catch (error) {
         console.log("error fetching product ", error);
       }
     };
 
+    check();
     getProduct();
-  }, []);
+  }, [reloadKey]);
 
   const router = useRouter();
   const params = useParams();
 
   const { id } = params;
-  const exits: boolean = product ? true : false;
+  const userId = useUserStore((state) => state._id);
+
+  const handleLike = async (e: MouseEvent<HTMLDivElement>) => {
+    const element = e.currentTarget
+    const updatedUser = await setLike(product as Product, currentUser as User);
+    if (updatedUser) {
+      setUser(updatedUser);
+    } else {
+      console.log("error con el usuario actualizado");
+    }
+    setReloadKey(reloadKey + 1);
+  };
 
   return (
     <div className={styles.main}>
@@ -48,9 +81,14 @@ const ProductDetail = () => {
 
         {product && (
           <h2>
-            {product.name} - {product.priceInCents / 100}€
+            {product.name} - {product.priceInCents / 100}€ -
           </h2>
         )}
+        <div className={styles.like} onClick={handleLike}>
+          {
+            isLiked ? <Heart fill="red" color="red"/> : <Heart/>
+          }
+        </div>
       </div>
 
       <img

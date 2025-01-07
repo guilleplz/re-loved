@@ -19,6 +19,7 @@ const categories: Categorie[] = await getAllCategories();
 const NavBar = () => {
   const removeUser = useUserStore((state) => state.removeUser);
   const setUser = useUserStore((state) => state.setUser);
+  const userId = useUserStore((state) => state._id);
   const router = useRouter();
   const pathname = usePathname();
 
@@ -49,19 +50,12 @@ const NavBar = () => {
   useEffect(() => {
     const check = async () => {
       const result = await checkLogged();
-
-
-
-      if (!result && (!pathname.includes("/products") && pathname !== "/sign-in" && pathname !== "/sign-up" && pathname !== "/")) {
-        console.log(pathname)
+      if (!result) {
         removeUser();
         setIsLogged(false);
-        router.push("/");
       } else {
-        if (result) {
-          setIsLogged(true)
-          setUser(result);
-        }
+        setIsLogged(true);
+        setUser(result);
       }
     };
 

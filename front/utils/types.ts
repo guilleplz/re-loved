@@ -17,12 +17,14 @@ export interface Product {
 }
 
 export interface User {
+  
+  
   _id?: mongoose.Types.ObjectId,
   name: string,
   surname: string,
   username: string;
   email: string;
   password: string;
-  productsInStore?: mongoose.Schema.Types.ObjectId[];
-  favProducts?: mongoose.Schema.Types.ObjectId[];
+  productsInStore?: mongoose.Types.ObjectId[];
+  favProducts?: mongoose.Types.ObjectId[];
 }

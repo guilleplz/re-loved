@@ -23,3 +23,16 @@
 .user_info {
   list-style: none;
 }
+
+.like {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform ease-in-out 2s;
+  padding: 5px;
+
+  & :hover {
+    transform: scale(1.1);
+  }
+}

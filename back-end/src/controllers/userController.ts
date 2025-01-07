@@ -208,8 +208,6 @@ export const getUserById = async (req: Request, res: Response): Promise<void> =>
  */
 export const updateUser = async (req: Request, res: Response): Promise<void> => {
   try {
-    const {name, surname, username, email, password, productsInStore, favProducts } = req.body;
-
     // Buscar usuario por ID
     const usuario = await User.findByIdAndUpdate(req.params.id, req.body, {new: true});
 
@@ -217,7 +215,7 @@ export const updateUser = async (req: Request, res: Response): Promise<void> => 
     if (!usuario) {
       res.status(404).json({ mensaje: 'Usuario no encontrado' });
     }
-    res.json(usuario);
+    res.status(200).json(usuario);
   } catch (err) {
     res.status(500).json({ mensaje: 'Error al actualizar el usuario', error: err });
   }

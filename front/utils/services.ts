@@ -13,8 +13,7 @@ export const getLatestProducts = async () => {
     method: "GET",
   });
   const products: Product[] = await response.json();
-  return products.reverse()
-
+  return products.reverse();
 };
 
 export const getProductsByCategory = async (categorieName: string) => {
@@ -22,17 +21,21 @@ export const getProductsByCategory = async (categorieName: string) => {
     method: "GET",
   });
   const products: Product[] = await response.json();
-  return products.filter((product: Product) => product.category === categorieName)
-
+  return products.filter(
+    (product: Product) => product.category === categorieName
+  );
 };
 
 export const getProductById = async (productId: string) => {
-  const response = await fetch(`http://localhost:8080/api/products/${productId}`, {
-    method: "GET"
-  })
+  const response = await fetch(
+    `http://localhost:8080/api/products/${productId}`,
+    {
+      method: "GET",
+    }
+  );
   const product: Product = await response.json();
   return product;
-}
+};
 
 export const getAllCategories = async () => {
   const res = await fetch("http://localhost:8080/api/categories", {
@@ -110,5 +113,43 @@ export const createNewProduct = async (product: Product) => {
     }
   } catch (err) {
     return err;
+  }
+};
+
+export const setLike = async (product: Product, user: User) => {
+  if (!product._id) return;
+  let favProducts = user.favProducts;
+  if (favProducts?.find(favproduct => favproduct._id === product._id)) {
+    console.log("encontrado")
+    favProducts = favProducts.filter(favProduct => favProduct._id.toString() !== product._id?.toString())
+    
+  } else {
+    console.log("no encontrado")
+    favProducts?.push(product._id);
+    console.log(favProducts)
+  }
+  try {
+    const response = await fetch(
+      `http://localhost:8080/api/users/${user._id?.toString()}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          favProducts,
+        }),
+      }
+    );
+    const updatedUser: User = await response.json()
+
+    if (response.ok) {
+      return updatedUser
+    }
+    console.log("error")
+    return
+  } catch (err) {
+    console.log(err);
+    return;
   }
 };

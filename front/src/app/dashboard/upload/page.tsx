@@ -1,9 +1,13 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { createNewProduct, getAllCategories, verifyToken } from "../../../../utils/services";
+import {
+  createNewProduct,
+  getAllCategories,
+  verifyToken,
+} from "../../../../utils/services";
 import { useRouter } from "next/navigation";
-import { useUserStore } from "@/store/user";
+import { checkLogged, useUserStore } from "@/store/user";
 import styles from "./page.module.css";
 import {
   CldUploadWidget,
@@ -20,9 +24,20 @@ const Upload = () => {
   const [error, setError] = useState<string>();
 
   const router = useRouter();
-  const userId = useUserStore((state) => state._id) as mongoose.Types.ObjectId
-  const username = useUserStore((state) => state.username)
+  const userId = useUserStore((state) => state._id) as mongoose.Types.ObjectId;
+  const username = useUserStore((state) => state.username);
   const removeUser = useUserStore((state) => state.removeUser);
+
+  useEffect(() => {
+    const check = async () => {
+      const result = await checkLogged();
+      if (!result) {
+        removeUser();
+        router.push("/");
+      }
+    };
+    check();
+  }, []);
 
   const handleUpload = (result: CloudinaryUploadWidgetResults) => {
     const info = result.info as CloudinaryUploadWidgetInfo;
@@ -32,12 +47,13 @@ const Upload = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const { nombre, descripcion, precio, categoria } = event.currentTarget.elements as any;
+    const { nombre, descripcion, precio, categoria } = event.currentTarget
+      .elements as any;
     const data = new FormData();
 
     if (!nombre || !descripcion || !precio || !categoria || url == "") {
-      setError("Deben rellenarse todos los campos y elegir una imagen")
-      return
+      setError("Deben rellenarse todos los campos y elegir una imagen");
+      return;
     }
 
     const newProduct: Product = {
@@ -46,12 +62,12 @@ const Upload = () => {
       category: categoria.value,
       description: descripcion.value,
       owner: userId,
-      img: url
-    }
+      img: url,
+    };
 
-    await createNewProduct(newProduct)
+    await createNewProduct(newProduct);
 
-    router.push("/dashboard")
+    router.push("/dashboard");
     return;
   };
 
@@ -95,20 +111,29 @@ const Upload = () => {
               onSuccess={handleUpload}
             >
               {({ open }) => {
-                return <button className={styles.submit_button} onClick={() => open()}>Upload an Image</button>;
+                return (
+                  <button
+                    className={styles.submit_button}
+                    onClick={() => open()}
+                  >
+                    Upload an Image
+                  </button>
+                );
               }}
             </CldUploadWidget>
-          {url && (
-            <img
-              src={url}
-              alt="imagen de preview"
-              className={styles.preview_image}
-            />
-          )}
+            {url && (
+              <img
+                src={url}
+                alt="imagen de preview"
+                className={styles.preview_image}
+              />
+            )}
           </div>
         </div>
 
-        <button type="submit" className={styles.submit_button}>submit</button>
+        <button type="submit" className={styles.submit_button}>
+          submit
+        </button>
         {error && <p className={styles.error}>{error}</p>}
       </form>
     </div>
