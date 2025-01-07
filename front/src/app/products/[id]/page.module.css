@@ -1,0 +1,25 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  padding: 50px;
+  gap: 10px;
+}
+
+.product_name {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  & h2 {
+    font-family: quicksand;
+  }
+}
+
+.img {
+  height: 200px;
+  width: 200px;
+}
+
+.user_info {
+  list-style: none;
+}

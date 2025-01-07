@@ -52,3 +52,13 @@
   height: 100%;
 }
 
+.heart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  transition: transform ease-in-out 0.5s;
+  & :hover {
+    transform: scale(1.1);
+  }
+}

@@ -9,7 +9,16 @@ import { useRouter } from "next/navigation";
 import ProductCarrousell from "@/components/products/ProductCarrousell";
 import data from "../../public/products.json";
 import { useEffect } from "react";
-import { verifyToken } from "../../utils/services";
+import { getLatestProducts, getProductsByCategory, verifyToken } from "../../utils/services";
+
+const latestproducts = await getLatestProducts()
+const modaProducts = await getProductsByCategory("Moda")
+const cocheProducts = await getProductsByCategory("Coches")
+const motosProducts = await getProductsByCategory("Motos")
+const tecnologiaProducts = await getProductsByCategory("Tecnología")
+const deportesProducts = await getProductsByCategory("Deportes")
+const ocioProducts = await getProductsByCategory("Ocio")
+const hogarProducts = await getProductsByCategory("Hogar")
 
 export default function page() {
   const router = useRouter();
@@ -55,10 +64,11 @@ export default function page() {
       {/* Sección de categorías y productos */}
 
       <section className={styles.products_section}>
-        <ProductCarrousell title="Novedades" products={productitems} />
-        <ProductCarrousell title="Moda" products={productitems} />
-        <ProductCarrousell title="Tecnologías" products={productitems} />
-        <ProductCarrousell title="Hogar" products={productitems} />
+        <ProductCarrousell title="Novedades" products={latestproducts} />
+        <ProductCarrousell title="Moda" products={modaProducts} />
+        <ProductCarrousell title="Tecnologías" products={tecnologiaProducts} />
+        <ProductCarrousell title="Hogar" products={hogarProducts} />
+        <ProductCarrousell title="Ocio" products={ocioProducts} />
       </section>
     </>
   );

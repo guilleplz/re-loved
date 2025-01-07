@@ -1,0 +1,11 @@
+.button {
+  border: 1px solid var(--brand-dark-blue);
+  border-radius: 5px;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: min-content;
+  transform: rotate(90deg);
+  background-color: white;
+}

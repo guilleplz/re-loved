@@ -26,6 +26,14 @@ export const getProductsByCategory = async (categorieName: string) => {
 
 };
 
+export const getProductById = async (productId: string) => {
+  const response = await fetch(`http://localhost:8080/api/products/${productId}`, {
+    method: "GET"
+  })
+  const product: Product = await response.json();
+  return product;
+}
+
 export const getAllCategories = async () => {
   const res = await fetch("http://localhost:8080/api/categories", {
     method: "GET",

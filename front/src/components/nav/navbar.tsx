@@ -52,7 +52,7 @@ const NavBar = () => {
 
 
 
-      if (!result && (pathname !== "/sign-in" && pathname !== "/sign-up" && pathname !== "/")) {
+      if (!result && (!pathname.includes("/products") && pathname !== "/sign-in" && pathname !== "/sign-up" && pathname !== "/")) {
         console.log(pathname)
         removeUser();
         setIsLogged(false);

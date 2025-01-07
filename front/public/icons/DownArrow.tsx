@@ -2,13 +2,15 @@ import React from "react";
 
 interface ArrowProps {
   color?: string;
+  width?: number;
+  heigth?: number;
 }
 
-const DownArrow = ({ color }: ArrowProps) => {
+const DownArrow = ({ color, width, heigth }: ArrowProps) => {
   return (
     <svg
-      width="34"
-      height="18"
+      width={width? width: "34"}
+      height={heigth? heigth: "18"}
       viewBox="0 0 34 18"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
