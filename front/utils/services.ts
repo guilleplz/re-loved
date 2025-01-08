@@ -106,6 +106,19 @@ export const getAllCategories = async () => {
   return categories;
 };
 
+export const getCategoryById = async (categoryId: string) => {
+  const res = await fetch("http://localhost:8080/api/categories", {
+    method: "GET",
+  });
+  const categories: Categorie[] = await res.json();
+  if (res.ok) {
+    return categories.find(categorie => categorie._id?.toString() === categoryId);
+  } else {
+    console.log("error al buscar la categoría");
+    return
+  }
+}
+
 export const getUserById = async (id: string) => {
   const res = await fetch(`http://localhost:8080/api/users/${id}`, {
     method: "GET",

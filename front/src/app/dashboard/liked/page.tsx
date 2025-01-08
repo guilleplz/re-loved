@@ -23,7 +23,7 @@ const LikedProductsPage = () => {
     const check = async () => {
       const result = await checkLogged();
       if (!result) {
-        router.push("/")
+        router.push("/sign-in")
         return
       }
       setUser(result);
