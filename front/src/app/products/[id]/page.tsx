@@ -57,11 +57,9 @@ const ProductDetail = () => {
     getProduct();
   }, [reloadKey]);
 
-  const router = useRouter();
   const params = useParams();
 
   const { id } = params;
-  const userId = useUserStore((state) => state._id);
 
   const handleLike = async (e: MouseEvent<HTMLDivElement>) => {
     const element = e.currentTarget

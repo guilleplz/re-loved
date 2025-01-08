@@ -1,5 +1,6 @@
 import { ObjectId, Types } from "mongoose";
 import { Categorie, Product, User } from "./types";
+import { responseCookiesToRequestCookies } from "next/dist/server/web/spec-extension/adapters/request-cookies";
 
 export const getAllProducts = async () => {
   const response = await fetch("http://localhost:8080/api/products", {
@@ -54,8 +55,32 @@ export const deleteProduct = async (product: Product) => {
       method: "DELETE",
     }
   );
-  
-  if (!response.ok) console.log("error eliminando producto")
+
+  if (!response.ok) console.log("error eliminando producto");
+  return;
+};
+
+export const updateProduct = async (product: Product) => {
+  const res = await fetch(
+    `http://localhost:8080/api/products/${product._id?.toString()}`,
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: product.name,
+        priceInCents: product.priceInCents,
+        category: product.category,
+        description: product.description,
+        owner: product.owner,
+        img: product.img,
+      }),
+    }
+  );
+  const updatedProduct = await res.json();
+  if (res.ok) return updatedProduct
+  console.log("error actualizando");
   return
 };
 

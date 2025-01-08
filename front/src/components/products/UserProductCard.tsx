@@ -12,11 +12,6 @@ interface UserProductCardProps {
 const UserProductCard = ({ product }: UserProductCardProps) => {
 
 
-  const handleEdit = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-
-  }
-
   const handleRemove = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     try {

@@ -1,33 +1,55 @@
 "use client";
-
 import React, { useEffect, useState } from "react";
 import {
-  createNewProduct,
   getAllCategories,
-  verifyToken,
-} from "../../../../utils/services";
-import { useRouter } from "next/navigation";
-import { checkLogged, useUserStore } from "@/store/user";
-import styles from "./page.module.css";
+  getProductById,
+  updateProduct,
+} from "../../../../../utils/services";
 import {
   CldUploadWidget,
   CloudinaryUploadWidgetInfo,
   CloudinaryUploadWidgetResults,
 } from "next-cloudinary";
-import { Product } from "../../../../utils/types";
-import mongoose from "mongoose";
+import styles from "./page.module.css";
+import { Product } from "../../../../../utils/types";
+import { useParams, useRouter } from "next/navigation";
+import { checkLogged, useUserStore } from "@/store/user";
+import { Types } from "mongoose";
 
 const categories = await getAllCategories();
 
-const Upload = () => {
+const EditProduct = () => {
   const [url, setUrl] = useState<string>("");
-  const [error, setError] = useState<string>();
+  const [product, setProduct] = useState<Product>();
+  const [formdata, setFormData] = useState({
+    nombre: "",
+    descripcion: "",
+    precio: 0,
+    categoria: "",
+  });
 
-  const router = useRouter();
-  const userId = useUserStore((state) => state._id) as mongoose.Types.ObjectId;
   const removeUser = useUserStore((state) => state.removeUser);
+  const router = useRouter();
+  const params = useParams();
+  const { id } = params;
 
   useEffect(() => {
+    const getProduct = async () => {
+      const currentproduct = await getProductById(id as string);
+      if (currentproduct) {
+        setProduct(currentproduct);
+        setFormData({
+          nombre: currentproduct.name,
+          descripcion: currentproduct.description,
+          precio: currentproduct.priceInCents,
+          categoria: currentproduct.category,
+        });
+        setUrl(currentproduct?.img as string);
+      } else {
+        console.log("producto no encontrado");
+        router.push("/dashboard");
+      }
+    };
     const check = async () => {
       const result = await checkLogged();
       if (!result) {
@@ -35,14 +57,10 @@ const Upload = () => {
         router.push("/");
       }
     };
-    check();
-  }, []);
 
-  const handleUpload = (result: CloudinaryUploadWidgetResults) => {
-    const info = result.info as CloudinaryUploadWidgetInfo;
-    const { url } = info;
-    setUrl(url);
-  };
+    check();
+    getProduct();
+  }, []);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -50,48 +68,91 @@ const Upload = () => {
       .elements as any;
     const data = new FormData();
 
-    if (!nombre || !descripcion || !precio || !categoria || url == "") {
-      setError("Deben rellenarse todos los campos y elegir una imagen");
-      return;
-    }
-
     const newProduct: Product = {
+      _id: product?._id,
       name: nombre.value,
       priceInCents: precio.value,
       category: categoria.value,
       description: descripcion.value,
-      owner: userId,
+      owner: product?.owner as Types.ObjectId,
       img: url,
     };
 
-    await createNewProduct(newProduct);
+    const updatedProduct = await updateProduct(newProduct);
 
-    router.push("/dashboard");
-    return;
+    if (updatedProduct) {
+      router.push("/dashboard/store");
+      return;
+    } else {
+      console.log("error");
+      return;
+    }
+  };
+
+  const handleUpload = (result: CloudinaryUploadWidgetResults) => {
+    const info = result.info as CloudinaryUploadWidgetInfo;
+    const { url } = info;
+    setUrl(url);
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData({ ...formdata, [name]: value });
+  };
+
+  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData({ ...formdata, [name]: value });
   };
 
   return (
     <div className={styles.body}>
-      <h1 className={styles.title}>Añadir un artículo</h1>
+      <h1 className={styles.title}>Editar un artículo</h1>
       <form onSubmit={handleSubmit} className={styles.form}>
         <div className={styles.separador_con_boton}>
           <div className={styles.separador_columnas}>
             <h2 className={styles.title}>Información sobre el artículo</h2>
             <div className={styles.separador_preguntas}>
               <label htmlFor="Nombre">Nombre del artículo: </label>
-              <input type="text" id="Nombre" name="nombre" autoComplete="off"/>
+              <input
+                type="text"
+                id="Nombre"
+                name="nombre"
+                value={formdata.nombre}
+                onChange={handleInputChange}
+                autoComplete="off"
+              />
             </div>
             <div className={styles.separador_preguntas}>
               <label htmlFor="Descripcion">Descripción: </label>
-              <input type="text" id="Descripcion" name="descripcion" autoComplete="off"/>
+              <input
+                type="text"
+                id="Descripcion"
+                name="descripcion"
+                value={formdata.descripcion}
+                onChange={handleInputChange}
+                autoComplete="off"
+              />
             </div>
             <div className={styles.separador_preguntas}>
               <label htmlFor="Precio">Precio (centimos): </label>
-              <input type="number" id="Precio" name="precio" autoComplete="off"/>
+              <input
+                type="number"
+                id="Precio"
+                name="precio"
+                value={formdata.precio}
+                onChange={handleInputChange}
+                autoComplete="off"
+              />
             </div>
             <div className={styles.separador_preguntas}>
               <label htmlFor="Categoria">Precio (€): </label>
-              <select id="Categoria" name="categoria">
+              <select
+                id="Categoria"
+                value={formdata.categoria}
+                onChange={handleSelectChange}
+                name="categoria"
+              >
                 {categories.map((categorie) => (
                   <option
                     key={categorie._id?.toString()}
@@ -131,12 +192,11 @@ const Upload = () => {
         </div>
 
         <button type="submit" className={styles.submit_button}>
-          submit
+          Actualizar
         </button>
-        {error && <p className={styles.error}>{error}</p>}
       </form>
     </div>
   );
 };
 
-export default Upload;
+export default EditProduct;

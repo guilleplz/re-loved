@@ -23,11 +23,8 @@ const hogarProducts = await getProductsByCategory("Hogar")
 export default function page() {
   const router = useRouter();
 
-  const productitems = JSON.parse(JSON.stringify(data.productos));
-
   useEffect(() => {
     const isLogged = async () => {
-      console.log("logueando");
       const token = localStorage.getItem("token");
 
       if (!token) return;

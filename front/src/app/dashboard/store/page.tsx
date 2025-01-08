@@ -42,11 +42,17 @@ const Store = () => {
     <div className={styles.main}>
       <aside className={styles.aside}>
         <div>
-          <img src="/users/default.webp"/>
+          <img src="/users/default.webp" />
           <h2>Tu tienda</h2>
         </div>
-        <a href="/dashboard/upload" className={styles.shop_button_add}>+ Añadir artículo</a>
-        <a href="/dashboard/config" className={styles.shop_button_conf}> <ConfigIcon/>Configuración</a>
+        <a href="/dashboard/upload" className={styles.shop_button_add}>
+          + Añadir artículo
+        </a>
+        <a href="/dashboard/config" className={styles.shop_button_conf}>
+          {" "}
+          <ConfigIcon />
+          Configuración
+        </a>
       </aside>
       <div className={styles.articulos}>
         <div className={styles.titulo}>
