@@ -62,6 +62,12 @@ const NavBar = () => {
     check();
   }, [pathname]);
 
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const { buscar } = event.currentTarget.elements as any;
+    router.replace(`/products/search/${buscar.value}`)
+  };
+
   return (
     <nav className={styles.nav}>
       <div className={styles.logo}>
@@ -89,8 +95,15 @@ const NavBar = () => {
       </div>
 
       <div className={styles.form_side}>
-        <form className={styles.form} action="/products">
-          <input className={styles.input_text} type="text" name="name" />
+        <form className={styles.form} onSubmit={handleSubmit}>
+          <input
+            className={styles.input_text}
+            type="text"
+            placeholder="Busca aquí lo que quieras"
+            autoComplete="off"
+            name="buscar"
+            id="buscar"
+          />
           <button className={styles.input_button} type="submit">
             <SearchIcon color="#111111" />
           </button>
@@ -113,7 +126,9 @@ const NavBar = () => {
               </button>
               <section className={`${styles.user_menu} ${styles.menu_hidden}`}>
                 <ul>
-                  <li><Link href={"/dashboard/store"}>Mi tienda</Link></li>
+                  <li>
+                    <Link href={"/dashboard/store"}>Mi tienda</Link>
+                  </li>
                   <li>
                     <button
                       className={styles.close_session_button}

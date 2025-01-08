@@ -7,7 +7,9 @@ export const getAllProducts = async () => {
   const response = await fetch("http://localhost:8080/api/products", {
     method: "GET",
   });
-  return await response.json();
+  const products: Product[] = await response.json();
+  if (response.ok) return products
+  else console.log("error obteniendo productos");
 };
 
 export const getLatestProducts = async () => {
