@@ -2,7 +2,7 @@ import { ObjectId, Types } from "mongoose";
 import { Categorie, Product, User } from "./types";
 
 export const getAllProducts = async () => {
-  const response = await fetch("localhost:8080/api/products", {
+  const response = await fetch("http://localhost:8080/api/products", {
     method: "GET",
   });
   return await response.json();
@@ -26,6 +26,16 @@ export const getProductsByCategory = async (categorieName: string) => {
   );
 };
 
+export const getProductsByUserId = async (userId: Types.ObjectId) => {
+  const response = await fetch("http://localhost:8080/api/products", {
+    method: "GET",
+  });
+  const products: Product[] = await response.json();
+  return products.filter(
+    (product) => product.owner.toString() === userId.toString()
+  );
+};
+
 export const getProductById = async (productId: string) => {
   const response = await fetch(
     `http://localhost:8080/api/products/${productId}`,
@@ -35,6 +45,18 @@ export const getProductById = async (productId: string) => {
   );
   const product: Product = await response.json();
   return product;
+};
+
+export const deleteProduct = async (product: Product) => {
+  const response = await fetch(
+    `http://localhost:8080/api/products/${product._id?.toString()}`,
+    {
+      method: "DELETE",
+    }
+  );
+  
+  if (!response.ok) console.log("error eliminando producto")
+  return
 };
 
 export const getAllCategories = async () => {
@@ -119,14 +141,15 @@ export const createNewProduct = async (product: Product) => {
 export const setLike = async (product: Product, user: User) => {
   if (!product._id) return;
   let favProducts = user.favProducts;
-  if (favProducts?.find(favproduct => favproduct._id === product._id)) {
-    console.log("encontrado")
-    favProducts = favProducts.filter(favProduct => favProduct._id.toString() !== product._id?.toString())
-    
+  if (favProducts?.find((favproduct) => favproduct._id === product._id)) {
+    console.log("encontrado");
+    favProducts = favProducts.filter(
+      (favProduct) => favProduct._id.toString() !== product._id?.toString()
+    );
   } else {
-    console.log("no encontrado")
+    console.log("no encontrado");
     favProducts?.push(product._id);
-    console.log(favProducts)
+    console.log(favProducts);
   }
   try {
     const response = await fetch(
@@ -141,13 +164,13 @@ export const setLike = async (product: Product, user: User) => {
         }),
       }
     );
-    const updatedUser: User = await response.json()
+    const updatedUser: User = await response.json();
 
     if (response.ok) {
-      return updatedUser
+      return updatedUser;
     }
-    console.log("error")
-    return
+    console.log("error");
+    return;
   } catch (err) {
     console.log(err);
     return;

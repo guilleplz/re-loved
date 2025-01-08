@@ -113,7 +113,7 @@ const NavBar = () => {
               </button>
               <section className={`${styles.user_menu} ${styles.menu_hidden}`}>
                 <ul>
-                  <li>Mi tienda</li>
+                  <li><Link href={"/dashboard/store"}>Mi tienda</Link></li>
                   <li>
                     <button
                       className={styles.close_session_button}

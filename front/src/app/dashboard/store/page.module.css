@@ -1,0 +1,94 @@
+.main {
+  display: flex;
+  height: 93vh;
+}
+
+.aside {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+
+  max-width: 350px;
+  width: 25vw;
+  height: 100%;
+  background-color: white;
+  padding-top: 20px;
+
+  & h2 {
+    font-size: 36px;
+    font-family: quicksand;
+  }
+
+  & img {
+    width: 66px;
+  }
+
+  & div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  & a {
+    display: flex;
+    gap: 5px
+  }
+}
+
+.shop_button_add {
+  width: 250px;
+  height: 40px;
+  border-radius: 8px;
+  background-color: var(--brand-dark-blue);
+  color: white;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.shop_button_conf {
+  width: 250px;
+  height: 40px;
+  border-radius: 8px;
+  background-color: white;
+  border: 1px solid var(--brand-dark-blue);
+  color: var(--brand-dark-blue);
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.articulos {
+  display: flex;
+  flex-direction: column;
+  width: 75vw;
+  padding: 20px
+}
+
+.titulo {
+  margin: 40px;
+  display: flex;
+  align-items: center;
+  font-family: quicksand;
+  gap: 10px
+}
+
+.product_flex {
+  margin: 40px;
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+}
+
+.product_grid {
+  display: grid;
+  grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );
+  justify-content: start;
+  gap: 10px;
+}

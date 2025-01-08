@@ -58,7 +58,7 @@
   justify-content: center;
   padding: 2px;
   transition: transform ease-in-out 0.5s;
-  & :hover {
+  &:hover {
     transform: scale(1.1);
   }
 }
