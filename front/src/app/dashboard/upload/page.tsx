@@ -115,7 +115,7 @@ const Upload = () => {
                     className={styles.upload_button}
                     onClick={() => open()}
                   >
-                    Upload an Image
+                    Sube una imagen
                   </button>
                 );
               }}
@@ -131,7 +131,7 @@ const Upload = () => {
         </div>
 
         <button type="submit" className={styles.submit_button}>
-          submit
+          Publicar
         </button>
         {error && <p className={styles.error}>{error}</p>}
       </form>

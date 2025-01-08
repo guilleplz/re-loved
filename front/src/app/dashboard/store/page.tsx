@@ -48,22 +48,18 @@ const Store = () => {
         <a href="/dashboard/upload" className={styles.shop_button_add}>
           + Añadir artículo
         </a>
-        <a href="/dashboard/config" className={styles.shop_button_conf}>
+        {/* <a href="/dashboard/config" className={styles.shop_button_conf}>
           {" "}
           <ConfigIcon />
           Configuración
-        </a>
+        </a> */}
       </aside>
       <div className={styles.articulos}>
         <div className={styles.titulo}>
           <BackButton href="/dashboard" />
           <h2>Tus artículos</h2>
         </div>
-        <div
-          className={
-            products.length > 5 ? styles.product_grid : styles.product_flex
-          }
-        >
+        <div className={styles.product_flex}>
           {products.map((product) => (
             <UserProductCard key={product._id?.toString()} product={product} />
           ))}
