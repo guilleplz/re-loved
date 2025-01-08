@@ -1,6 +1,7 @@
 import { ObjectId, Types } from "mongoose";
 import { Categorie, Product, User } from "./types";
 import { responseCookiesToRequestCookies } from "next/dist/server/web/spec-extension/adapters/request-cookies";
+import { useServerInsertedHTML } from "next/navigation";
 
 export const getAllProducts = async () => {
   const response = await fetch("http://localhost:8080/api/products", {
@@ -36,6 +37,19 @@ export const getProductsByUserId = async (userId: Types.ObjectId) => {
     (product) => product.owner.toString() === userId.toString()
   );
 };
+
+export const getFavProductsByUserId = async (userId: Types.ObjectId) => {
+  const response = await fetch(`http://localhost:8080/api/users/${userId.toString()}`, {
+    method: "GET"
+  });
+  const user: User = await response.json()
+  const favProductsId: Product[] = user.favProducts as any
+
+  if (response.ok) {
+    return favProductsId;
+  } else console.log("error obteniendo Id de productos favoritos")
+  return
+}
 
 export const getProductById = async (productId: string) => {
   const response = await fetch(
@@ -166,6 +180,7 @@ export const createNewProduct = async (product: Product) => {
 export const setLike = async (product: Product, user: User) => {
   if (!product._id) return;
   let favProducts = user.favProducts;
+
   if (favProducts?.find((favproduct) => favproduct._id === product._id)) {
     console.log("encontrado");
     favProducts = favProducts.filter(

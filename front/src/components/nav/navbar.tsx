@@ -98,7 +98,7 @@ const NavBar = () => {
         <div className={styles.log_buttons}>
           {isLogged ? (
             <>
-              <Button type="normal" href="/dashboard">
+              <Button type="normal" href="/dashboard/liked">
                 <HeartIcon />
               </Button>
               <Button type="yellow" href="/dashboard/upload">

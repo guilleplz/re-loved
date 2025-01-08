@@ -25,6 +25,8 @@ const ProductDetail = () => {
   const [isLiked, setIsLiked] = useState<boolean>()
   const [reloadKey, setReloadKey] = useState(0);
 
+  const router = useRouter()
+
   const setUser = useUserStore((state) => state.setUser);
 
   useEffect(() => {
@@ -63,6 +65,10 @@ const ProductDetail = () => {
 
   const handleLike = async (e: MouseEvent<HTMLDivElement>) => {
     const element = e.currentTarget
+    if (!currentUser?.favProducts) {
+      router.push("/sign-in")
+      return
+    }
     const updatedUser = await setLike(product as Product, currentUser as User);
     if (updatedUser) {
       setUser(updatedUser);

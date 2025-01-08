@@ -2,7 +2,6 @@ import { create } from "zustand";
 import { User } from "../../utils/types";
 import mongoose, { set } from "mongoose";
 import { getIdFromToken, getUserById, verifyToken } from "../../utils/services";
-import { useRouter } from "next/navigation";
 
 interface UserStore extends User {
   setUser: (user: User) => void;
