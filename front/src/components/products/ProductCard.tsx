@@ -18,39 +18,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
   const setUser = useUserStore((state) => state.setUser);
   const [reloadKey, setReloadKey] = useState(0);
 
-  const router = useRouter();
-
-  useEffect(() => {
-    const check = async () => {
-      const result = await checkLogged();
-      if (result) {
-        setCurrentUser(result);
-        const finded = result.favProducts?.find(
-          (favProduct) => favProduct._id.toString() === product._id?.toString()
-        );
-
-        if (finded) setIsLiked(true);
-        else setIsLiked(false);
-      }
-    };
-
-    check();
-  }, [reloadKey]);
-
-  const handleSetLike = async (e: React.MouseEvent<HTMLDivElement>) => {
-    const element = e.currentTarget;
-    if (!currentUser?.favProducts) {
-      router.push("/sign-in");
-      return;
-    }
-    const updatedUser = await setLike(product as Product, currentUser as User);
-    if (updatedUser) {
-      setUser(updatedUser);
-    } else {
-      console.log("error con el usuario actualizado");
-    }
-    setReloadKey(reloadKey + 1);
-  };
+  
 
   return (
     <div className={styles.container}>
@@ -67,9 +35,6 @@ const ProductCard = ({ product }: ProductCardProps) => {
           </div>
         </section>
       </a>
-      <div className={styles.heart} onClick={handleSetLike}>
-        {isLiked ? <Heart fill="red" color="red" /> : <Heart />}
-      </div>
     </div>
   );
 };

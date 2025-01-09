@@ -17,7 +17,7 @@ const SearchPage = () => {
       const searchedProducts = await getAllProducts();
       if (searchedProducts) {
         setProducts(
-          searchedProducts?.filter((product) => product.name.includes(value as string))
+          searchedProducts?.filter((product) => product.name.toLocaleLowerCase().includes(value?.toString().toLowerCase() as string))
         );
       } else {
         console.log("error");

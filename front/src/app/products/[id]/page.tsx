@@ -13,7 +13,6 @@ import { Product, User } from "../../../../utils/types";
 import styles from "./page.module.css";
 import BackButton from "@/components/BackButton";
 import ProductCarrousell from "@/components/products/ProductCarrousell";
-import HeartIcon from "../../../../public/icons/HeartIcon";
 import Heart from "../../../../public/icons/Heart";
 import { checkLogged, useUserStore } from "@/store/user";
 
@@ -22,12 +21,15 @@ const ProductDetail = () => {
   const [otherProducts, setOtherProducts] = useState<Product[]>();
   const [useroftheProduct, setUserOfTheProduct] = useState<User>();
   const [currentUser, setCurrentUser] = useState<User>();
-  const [isLiked, setIsLiked] = useState<boolean>()
+  const [isLiked, setIsLiked] = useState<boolean>();
   const [reloadKey, setReloadKey] = useState(0);
 
-  const router = useRouter()
-
   const setUser = useUserStore((state) => state.setUser);
+  const router = useRouter();
+  const params = useParams();
+
+  const { id } = params;
+  const userId = useUserStore((state) => state._id);
 
   useEffect(() => {
     const check = async () => {
@@ -36,7 +38,10 @@ const ProductDetail = () => {
         setCurrentUser(result);
       }
     };
+    check();
+  }, [reloadKey]);
 
+  useEffect(() => {
     const getProduct = async () => {
       try {
         const product = await getProductById(id as string);
@@ -45,30 +50,23 @@ const ProductDetail = () => {
         setProduct(product);
         setOtherProducts(products);
         setUserOfTheProduct(user);
-        if (user.favProducts?.find(favProduct => favProduct._id === product._id)) {
-          setIsLiked(true)
+        if (
+          currentUser?.favProducts?.find((favProduct) => favProduct._id === product._id)
+        ) {
+          setIsLiked(true);
         } else {
-          setIsLiked(false)
+          setIsLiked(false);
         }
       } catch (error) {
         console.log("error fetching product ", error);
       }
     };
-
-    check();
     getProduct();
-  }, [reloadKey]);
+  }, [currentUser]);
 
-  const params = useParams();
-
-  const { id } = params;
 
   const handleLike = async (e: MouseEvent<HTMLDivElement>) => {
-    const element = e.currentTarget
-    if (!currentUser?.favProducts) {
-      router.push("/sign-in")
-      return
-    }
+    const element = e.currentTarget;
     const updatedUser = await setLike(product as Product, currentUser as User);
     if (updatedUser) {
       setUser(updatedUser);
@@ -89,9 +87,7 @@ const ProductDetail = () => {
           </h2>
         )}
         <div className={styles.like} onClick={handleLike}>
-          {
-            isLiked ? <Heart fill="red" color="red"/> : <Heart/>
-          }
+          {isLiked ? <Heart fill="red" color="red" /> : <Heart />}
         </div>
       </div>
 

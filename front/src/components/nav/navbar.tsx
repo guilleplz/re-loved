@@ -65,7 +65,10 @@ const NavBar = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const { buscar } = event.currentTarget.elements as any;
-    router.replace(`/products/search/${buscar.value}`)
+    if (buscar.value) {
+      router.replace(`/products/search/${buscar.value}`)
+    }
+    return
   };
 
   return (

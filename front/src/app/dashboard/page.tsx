@@ -6,23 +6,26 @@ import DownArrow from "../../../public/icons/DownArrow";
 import ProductCarrousell from "@/components/products/ProductCarrousell";
 import data from "../../../public/products.json";
 import { useUserStore } from "@/store/user";
-import { useEffect } from "react";
-import { getLatestProducts, getProductsByCategory, verifyToken } from "../../../utils/services";
+import { useEffect, useState } from "react";
+import {
+  getLatestProducts,
+  getProductsByCategory,
+  verifyToken,
+} from "../../../utils/services";
 import { useRouter } from "next/navigation";
-
-const latestproducts = await getLatestProducts()
-const modaProducts = await getProductsByCategory("Moda")
-const cocheProducts = await getProductsByCategory("Coches")
-const motosProducts = await getProductsByCategory("Motos")
-const tecnologiaProducts = await getProductsByCategory("Tecnología")
-const deportesProducts = await getProductsByCategory("Deportes")
-const ocioProducts = await getProductsByCategory("Ocio")
-const hogarProducts = await getProductsByCategory("Hogar")
+import { Product } from "../../../utils/types";
 
 export default function Dashboard() {
-
-
   const router = useRouter();
+
+  const [latestProducts, setLatestProducts] = useState<Product[]>([]);
+  const [modaProducts, setModaProducts] = useState<Product[]>([]);
+  const [cocheProducts, setCocheProducts] = useState<Product[]>([]);
+  const [motosProducts, setMotosProducts] = useState<Product[]>([]);
+  const [tecnologiaProducts, setTecnologiaProducts] = useState<Product[]>([]);
+  const [deportesProducts, setDeportesProducts] = useState<Product[]>([]);
+  const [ocioProducts, setOcioProducts] = useState<Product[]>([]);
+  const [hogarProducts, setHogarProducts] = useState<Product[]>([]);
 
   const userName = useUserStore((state) => state.username);
   const removeUser = useUserStore((state) => state.removeUser);
@@ -44,7 +47,28 @@ export default function Dashboard() {
       }
     };
 
+    const getCategories = async () => {
+      const latest = await getLatestProducts()
+      const moda = await getProductsByCategory("Moda")
+      const coche = await getProductsByCategory("Coches")
+      const motos = await getProductsByCategory("Motos")
+      const tecnologia = await getProductsByCategory("Tecnología")
+      const deportes = await getProductsByCategory("Deportes")
+      const ocio = await getProductsByCategory("Ocio")
+      const hogar = await getProductsByCategory("Hogar")
+
+      setLatestProducts(latest)
+      setModaProducts(moda)
+      setCocheProducts(coche)
+      setMotosProducts(motos)
+      setTecnologiaProducts(tecnologia)
+      setDeportesProducts(deportes)
+      setOcioProducts(ocio)
+      setHogarProducts(hogar)
+    }
+
     checkLogged();
+    getCategories();
   }, []);
 
   return (
@@ -74,12 +98,14 @@ export default function Dashboard() {
       {/* Sección de categorías y productos */}
 
       <section className={styles.products_section}>
-        <ProductCarrousell title="Novedades" products={latestproducts} />
+        <ProductCarrousell title="Novedades" products={latestProducts} />
         <ProductCarrousell title="Moda" products={modaProducts} />
+        <ProductCarrousell title="Coches" products={cocheProducts} />
+        <ProductCarrousell title="Motos" products={motosProducts} />
         <ProductCarrousell title="Tecnologías" products={tecnologiaProducts} />
+        <ProductCarrousell title="Deportes" products={deportesProducts} />
         <ProductCarrousell title="Hogar" products={hogarProducts} />
         <ProductCarrousell title="Ocio" products={ocioProducts} />
-
       </section>
     </>
   );

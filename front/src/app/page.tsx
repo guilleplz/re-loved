@@ -1,27 +1,29 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import styles from "./page.module.css";
 import RightArrow from "../../public/icons/RightArrow";
 import DownArrow from "../../public/icons/DownArrow";
 import { useRouter } from "next/navigation";
 import ProductCarrousell from "@/components/products/ProductCarrousell";
-import data from "../../public/products.json";
-import { useEffect } from "react";
-import { getLatestProducts, getProductsByCategory, verifyToken } from "../../utils/services";
-
-const latestproducts = await getLatestProducts()
-const modaProducts = await getProductsByCategory("Moda")
-const cocheProducts = await getProductsByCategory("Coches")
-const motosProducts = await getProductsByCategory("Motos")
-const tecnologiaProducts = await getProductsByCategory("Tecnología")
-const deportesProducts = await getProductsByCategory("Deportes")
-const ocioProducts = await getProductsByCategory("Ocio")
-const hogarProducts = await getProductsByCategory("Hogar")
+import { useEffect, useState } from "react";
+import {
+  getLatestProducts,
+  getProductsByCategory,
+  verifyToken,
+} from "../../utils/services";
+import { Product } from "../../utils/types";
 
 export default function page() {
   const router = useRouter();
+  const [latestProducts, setLatestProducts] = useState<Product[]>([]);
+  const [modaProducts, setModaProducts] = useState<Product[]>([]);
+  const [cocheProducts, setCocheProducts] = useState<Product[]>([]);
+  const [motosProducts, setMotosProducts] = useState<Product[]>([]);
+  const [tecnologiaProducts, setTecnologiaProducts] = useState<Product[]>([]);
+  const [deportesProducts, setDeportesProducts] = useState<Product[]>([]);
+  const [ocioProducts, setOcioProducts] = useState<Product[]>([]);
+  const [hogarProducts, setHogarProducts] = useState<Product[]>([]);
 
   useEffect(() => {
     const isLogged = async () => {
@@ -34,7 +36,28 @@ export default function page() {
       if (result) router.push("/dashboard");
     };
 
+    const getCategories = async () => {
+      const latest = await getLatestProducts();
+      const moda = await getProductsByCategory("Moda");
+      const coche = await getProductsByCategory("Coches");
+      const motos = await getProductsByCategory("Motos");
+      const tecnologia = await getProductsByCategory("Tecnología");
+      const deportes = await getProductsByCategory("Deportes");
+      const ocio = await getProductsByCategory("Ocio");
+      const hogar = await getProductsByCategory("Hogar");
+
+      setLatestProducts(latest);
+      setModaProducts(moda);
+      setCocheProducts(coche);
+      setMotosProducts(motos);
+      setTecnologiaProducts(tecnologia);
+      setDeportesProducts(deportes);
+      setOcioProducts(ocio);
+      setHogarProducts(hogar);
+    };
+
     isLogged();
+    getCategories();
   }, []);
 
   return (
@@ -61,9 +84,12 @@ export default function page() {
       {/* Sección de categorías y productos */}
 
       <section className={styles.products_section}>
-        <ProductCarrousell title="Novedades" products={latestproducts} />
+        <ProductCarrousell title="Novedades" products={latestProducts} />
         <ProductCarrousell title="Moda" products={modaProducts} />
+        <ProductCarrousell title="Coches" products={cocheProducts} />
+        <ProductCarrousell title="Motos" products={motosProducts} />
         <ProductCarrousell title="Tecnologías" products={tecnologiaProducts} />
+        <ProductCarrousell title="Deportes" products={deportesProducts} />
         <ProductCarrousell title="Hogar" products={hogarProducts} />
         <ProductCarrousell title="Ocio" products={ocioProducts} />
       </section>

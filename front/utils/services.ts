@@ -8,7 +8,7 @@ export const getAllProducts = async () => {
     method: "GET",
   });
   const products: Product[] = await response.json();
-  if (response.ok) return products
+  if (response.ok) return products;
   else console.log("error obteniendo productos");
 };
 
@@ -41,17 +41,20 @@ export const getProductsByUserId = async (userId: Types.ObjectId) => {
 };
 
 export const getFavProductsByUserId = async (userId: Types.ObjectId) => {
-  const response = await fetch(`http://localhost:8080/api/users/${userId.toString()}`, {
-    method: "GET"
-  });
-  const user: User = await response.json()
-  const favProductsId: Product[] = user.favProducts as any
+  const response = await fetch(
+    `http://localhost:8080/api/users/${userId.toString()}`,
+    {
+      method: "GET",
+    }
+  );
+  const user: User = await response.json();
+  const favProductsId: Product[] = user.favProducts as any;
 
   if (response.ok) {
     return favProductsId;
-  } else console.log("error obteniendo Id de productos favoritos")
-  return
-}
+  } else console.log("error obteniendo Id de productos favoritos");
+  return;
+};
 
 export const getProductById = async (productId: string) => {
   const response = await fetch(
@@ -95,9 +98,9 @@ export const updateProduct = async (product: Product) => {
     }
   );
   const updatedProduct = await res.json();
-  if (res.ok) return updatedProduct
+  if (res.ok) return updatedProduct;
   console.log("error actualizando");
-  return
+  return;
 };
 
 export const getAllCategories = async () => {
@@ -114,12 +117,14 @@ export const getCategoryById = async (categoryId: string) => {
   });
   const categories: Categorie[] = await res.json();
   if (res.ok) {
-    return categories.find(categorie => categorie._id?.toString() === categoryId);
+    return categories.find(
+      (categorie) => categorie._id?.toString() === categoryId
+    );
   } else {
     console.log("error al buscar la categoría");
-    return
+    return;
   }
-}
+};
 
 export const getUserById = async (id: string) => {
   const res = await fetch(`http://localhost:8080/api/users/${id}`, {
@@ -195,16 +200,13 @@ export const createNewProduct = async (product: Product) => {
 export const setLike = async (product: Product, user: User) => {
   if (!product._id) return;
   let favProducts = user.favProducts;
-
+  
   if (favProducts?.find((favproduct) => favproduct._id === product._id)) {
-    console.log("encontrado");
     favProducts = favProducts.filter(
       (favProduct) => favProduct._id.toString() !== product._id?.toString()
     );
   } else {
-    console.log("no encontrado");
     favProducts?.push(product._id);
-    console.log(favProducts);
   }
   try {
     const response = await fetch(
@@ -222,6 +224,7 @@ export const setLike = async (product: Product, user: User) => {
     const updatedUser: User = await response.json();
 
     if (response.ok) {
+
       return updatedUser;
     }
     console.log("error");
